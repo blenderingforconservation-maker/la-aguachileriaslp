@@ -40,8 +40,9 @@ a{color:inherit}
   width:100%;height:100%;object-fit:cover;
 }
 .hero.has-photo:after{
+  /* Degradado mucho más suave para que la foto luzca clara */
   content:"";position:absolute;inset:0;z-index:-2;
-  background:linear-gradient(90deg,#05353cf0,#006c7880);
+  background:linear-gradient(90deg,#05353c99,#006c784d);
 }
 .top{display:flex;justify-content:flex-end;align-items:center;gap:18px;padding-block:22px}
 .kicker{font-size:11px;font-weight:800;letter-spacing:1.6px;line-height:1.6;text-transform:uppercase}
@@ -476,7 +477,7 @@ legend{font-weight:700;margin-bottom:15px}
 "use strict";
 
 /* ============================================================
-   ZONA EDITABLE
+   ZONA EDITABLE - CONFIGURACIÓN PRINCIPAL
    ============================================================ */
 const CONFIG = {
   nombre:"La Aguachilería",
@@ -487,11 +488,29 @@ const CONFIG = {
   lema:"Con #aguachileria la vida es más Sabrosa",
   lemaEn:"Life tastes better with #aguachileria",
   
-  // ¡CORREGIDO! Aquí estaba el problema de la ruta de la imagen
+  // Ruta de la imagen de portada
   portada:"imagenes/restaurante.jpg",
   
+  /*
+   ============================================================
+   SISTEMA DE FOTOGRAFÍAS DE PLATILLOS
+   ============================================================
+   El código busca automáticamente las imágenes en la carpeta 
+   indicada abajo basándose en el nombre del platillo.
+   
+   Reglas para nombrar las fotos:
+   1. Todo en minúsculas.
+   2. Sin acentos ni caracteres especiales.
+   3. Cambia los espacios por guiones (-).
+   
+   Ejemplos de cómo nombrar el archivo:
+   - "Aguachile de camarón" -> aguachile-de-camaron.jpg
+   - "Dedos de queso"       -> dedos-de-queso.jpg
+   - "Caldo de camarón"     -> caldo-de-camaron.jpg
+  */
   carpetaFotos:"images/Menu/",
   extensionFotos:".jpg",
+
   sucursales:[
     {
       id:"chapultepec",
@@ -520,9 +539,9 @@ const CATEGORIAS = {
   fresco:["Lo fresco","Fresh seafood","🐟"],
   caliente:["Lo caliente","Hot dishes","🐙"],
   tiraditos:["Tiraditos","Tiraditos","🐠"],
-  tortas:["Tortas","Tortas","🥪"], // Corregido: pan / sándwich
-  tostadas:["Tostadas","Tostadas","🐠"], // Corregido: otro pez
-  kids:["Menú kids","Kids menu","🍟"], // Corregido: papas
+  tortas:["Tortas","Tortas","🥖"], // Cambiado a pan (bolillo/baguette)
+  tostadas:["Tostadas","Tostadas","🐠"],
+  kids:["Menú kids","Kids menu","🍟"], // Cambiado a papas a la francesa
   extras:["Extras","Extras","🥑"],
   postres:["Postres","Desserts","🍰"],
   bebidas:["Bebidas","Drinks","🍹"]
