@@ -40,7 +40,6 @@ a{color:inherit}
   width:100%;height:100%;object-fit:cover;
 }
 .hero.has-photo:after{
-  /* Degradado mucho más suave para que la foto luzca clara */
   content:"";position:absolute;inset:0;z-index:-2;
   background:linear-gradient(90deg,#05353c99,#006c784d);
 }
@@ -414,55 +413,65 @@ legend{font-weight:700;margin-bottom:15px}
 
 <dialog id="orderDialog" aria-labelledby="orderTitle">
   <div class="dialog-content">
-    <div class="dialog-head">
-      <h2 id="orderTitle" data-t="orderTitle">Mi pedido</h2>
-      <button id="closeOrder" class="close" type="button" aria-label="Cerrar">×</button>
+    <div id="orderBody">
+      <div class="dialog-head">
+        <h2 id="orderTitle" data-t="orderTitle">Mi pedido</h2>
+        <button id="closeOrder" class="close" type="button" aria-label="Cerrar">×</button>
+      </div>
+      <p class="hint" data-t="review">Revisa platillos, presentaciones y cantidades.</p>
+      <div id="cartRows"></div>
+      <div class="totals" aria-live="polite">
+        <div><span data-t="subtotal">Productos</span><strong id="subtotal"></strong></div>
+        <div><span data-t="shipping">Envío</span><strong id="shipping"></strong></div>
+        <div class="total"><span data-t="total">Total estimado</span><strong id="total"></strong></div>
+      </div>
+      <div id="cartStep">
+        <button id="continueOrder" class="button full" type="button" data-t="continue">CONTINUAR</button>
+        <button id="more" class="button secondary full" type="button" data-t="more">AGREGAR MÁS PLATILLOS</button>
+      </div>
+      <form id="orderForm" hidden>
+        <fieldset>
+          <legend data-t="details">Datos de tu pedido</legend>
+          <div class="fields">
+            <label class="field"><span data-t="branch">Sucursal</span><select id="branchSelect" required></select></label>
+            <label class="field"><span data-t="service">Servicio</span><select id="service">
+              <option value="delivery" data-t="delivery">Entrega a domicilio</option>
+              <option value="pickup" data-t="pickup">Recoger en sucursal</option>
+            </select></label>
+            <label class="field"><span data-t="name">Nombre *</span><input id="customer" autocomplete="name" maxlength="100" required></label>
+            <label class="field"><span data-t="phone">Celular *</span><input id="phone" type="tel" autocomplete="tel" maxlength="25" required></label>
+          </div>
+        </fieldset>
+        <fieldset id="addressFields">
+          <legend data-t="address">Domicilio de entrega</legend>
+          <div class="fields">
+            <label class="field wide"><span data-t="street">Calle *</span><input id="street" autocomplete="address-line1" maxlength="150" required></label>
+            <label class="field"><span data-t="number">Número exterior *</span><input id="number" maxlength="30" required></label>
+            <label class="field"><span data-t="neighborhood">Colonia *</span><input id="neighborhood" maxlength="100" required></label>
+            <label class="field"><span data-t="city">Municipio *</span><input id="city" value="San Luis Potosí" autocomplete="address-level2" maxlength="100" required></label>
+            <label class="field"><span data-t="zip">Código postal *</span><input id="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required></label>
+            <label class="field wide"><span data-t="references">Referencias (opcional)</span><input id="references" maxlength="250"></label>
+            <label class="field wide"><span data-t="location">Ubicación / enlace de Maps (opcional)</span><input id="location" maxlength="500"></label>
+          </div>
+          <button id="useLocation" class="button secondary full" type="button" data-t="useLocation">USAR MI UBICACIÓN</button>
+          <p id="locationStatus" class="hint" role="status"></p>
+          <p class="hint" data-t="geoNote">Solo se consulta tu ubicación al pulsar el botón. Verifica que corresponda al domicilio de entrega.</p>
+        </fieldset>
+        <label class="field"><span data-t="notes">Indicaciones para tus platillos (opcional)</span><textarea id="notes" maxlength="500" rows="3"></textarea></label>
+        <p class="hint" data-t="confirm">El restaurante confirmará disponibilidad, costo final, formas de pago y tiempo de entrega o recolección.</p>
+        <button class="button full" type="submit" data-t="send">CONTINUAR EN WHATSAPP</button>
+        <button id="back" class="button secondary full" type="button" data-t="back">VOLVER A MI PEDIDO</button>
+        <p class="hint" data-t="waNote">WhatsApp se abrirá con el pedido preparado. Pulsa Enviar allí para solicitarlo.</p>
+      </form>
     </div>
-    <p class="hint" data-t="review">Revisa platillos, presentaciones y cantidades.</p>
-    <div id="cartRows"></div>
-    <div class="totals" aria-live="polite">
-      <div><span data-t="subtotal">Productos</span><strong id="subtotal"></strong></div>
-      <div><span data-t="shipping">Envío</span><strong id="shipping"></strong></div>
-      <div class="total"><span data-t="total">Total estimado</span><strong id="total"></strong></div>
+
+    <!-- Pantalla limpia de confirmación tras enviar el pedido -->
+    <div id="orderSuccess" hidden style="text-align:center;padding:26px 12px 14px;">
+      <div style="width:72px;height:72px;margin:0 auto 18px;border-radius:50%;background:#E6F7ED;display:grid;place-items:center;color:#25D366;font-size:38px;box-shadow:0 6px 18px #25D36622;">✓</div>
+      <h2 style="font-family:Georgia,serif;font-size:29px;margin:0 0 10px;color:var(--ink);" data-t="sentTitle">Pedido enviado</h2>
+      <p style="font-size:16px;line-height:1.6;color:var(--muted);margin:0 0 26px;" data-t="sentDesc">Consulte el chat en WhatsApp</p>
+      <button id="closeSuccess" class="button full" type="button" data-t="backMenu">VOLVER AL MENÚ</button>
     </div>
-    <div id="cartStep">
-      <button id="continueOrder" class="button full" type="button" data-t="continue">CONTINUAR</button>
-      <button id="more" class="button secondary full" type="button" data-t="more">AGREGAR MÁS PLATILLOS</button>
-    </div>
-    <form id="orderForm" hidden>
-      <fieldset>
-        <legend data-t="details">Datos de tu pedido</legend>
-        <div class="fields">
-          <label class="field"><span data-t="branch">Sucursal</span><select id="branchSelect" required></select></label>
-          <label class="field"><span data-t="service">Servicio</span><select id="service">
-            <option value="delivery" data-t="delivery">Entrega a domicilio</option>
-            <option value="pickup" data-t="pickup">Recoger en sucursal</option>
-          </select></label>
-          <label class="field"><span data-t="name">Nombre *</span><input id="customer" autocomplete="name" maxlength="100" required></label>
-          <label class="field"><span data-t="phone">Celular *</span><input id="phone" type="tel" autocomplete="tel" maxlength="25" required></label>
-        </div>
-      </fieldset>
-      <fieldset id="addressFields">
-        <legend data-t="address">Domicilio de entrega</legend>
-        <div class="fields">
-          <label class="field wide"><span data-t="street">Calle *</span><input id="street" autocomplete="address-line1" maxlength="150" required></label>
-          <label class="field"><span data-t="number">Número exterior *</span><input id="number" maxlength="30" required></label>
-          <label class="field"><span data-t="neighborhood">Colonia *</span><input id="neighborhood" maxlength="100" required></label>
-          <label class="field"><span data-t="city">Municipio *</span><input id="city" value="San Luis Potosí" autocomplete="address-level2" maxlength="100" required></label>
-          <label class="field"><span data-t="zip">Código postal *</span><input id="zip" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}" maxlength="5" required></label>
-          <label class="field wide"><span data-t="references">Referencias (opcional)</span><input id="references" maxlength="250"></label>
-          <label class="field wide"><span data-t="location">Ubicación / enlace de Maps (opcional)</span><input id="location" maxlength="500"></label>
-        </div>
-        <button id="useLocation" class="button secondary full" type="button" data-t="useLocation">USAR MI UBICACIÓN</button>
-        <p id="locationStatus" class="hint" role="status"></p>
-        <p class="hint" data-t="geoNote">Solo se consulta tu ubicación al pulsar el botón. Verifica que corresponda al domicilio de entrega.</p>
-      </fieldset>
-      <label class="field"><span data-t="notes">Indicaciones para tus platillos (opcional)</span><textarea id="notes" maxlength="500" rows="3"></textarea></label>
-      <p class="hint" data-t="confirm">El restaurante confirmará disponibilidad, costo final, formas de pago y tiempo de entrega o recolección.</p>
-      <button class="button full" type="submit" data-t="send">CONTINUAR EN WHATSAPP</button>
-      <button id="back" class="button secondary full" type="button" data-t="back">VOLVER A MI PEDIDO</button>
-      <p class="hint" data-t="waNote">WhatsApp se abrirá con el pedido preparado. Pulsa Enviar allí para solicitarlo.</p>
-    </form>
   </div>
 </dialog>
 
@@ -488,26 +497,7 @@ const CONFIG = {
   lema:"Con #aguachileria la vida es más Sabrosa",
   lemaEn:"Life tastes better with #aguachileria",
   
-  // Ruta de la imagen de portada
   portada:"imagenes/restaurante.jpg",
-  
-  /*
-   ============================================================
-   SISTEMA DE FOTOGRAFÍAS DE PLATILLOS
-   ============================================================
-   El código busca automáticamente las imágenes en la carpeta 
-   indicada abajo basándose en el nombre del platillo.
-   
-   Reglas para nombrar las fotos:
-   1. Todo en minúsculas.
-   2. Sin acentos ni caracteres especiales.
-   3. Cambia los espacios por guiones (-).
-   
-   Ejemplos de cómo nombrar el archivo:
-   - "Aguachile de camarón" -> aguachile-de-camaron.jpg
-   - "Dedos de queso"       -> dedos-de-queso.jpg
-   - "Caldo de camarón"     -> caldo-de-camaron.jpg
-  */
   carpetaFotos:"images/Menu/",
   extensionFotos:".jpg",
 
@@ -539,15 +529,14 @@ const CATEGORIAS = {
   fresco:["Lo fresco","Fresh seafood","🐟"],
   caliente:["Lo caliente","Hot dishes","🐙"],
   tiraditos:["Tiraditos","Tiraditos","🐠"],
-  tortas:["Tortas","Tortas","🥖"], // Cambiado a pan (bolillo/baguette)
+  tortas:["Tortas","Tortas","🥖"],
   tostadas:["Tostadas","Tostadas","🐠"],
-  kids:["Menú kids","Kids menu","🍟"], // Cambiado a papas a la francesa
+  kids:["Menú kids","Kids menu","🍟"],
   extras:["Extras","Extras","🥑"],
   postres:["Postres","Desserts","🍰"],
   bebidas:["Bebidas","Drinks","🍹"]
 };
 
-// Categorías según el modo de pedido seleccionado
 const CATS_RESTAURANTE = ["entradas","fresco","caliente","tiraditos","tortas","tostadas","kids","extras","postres","bebidas"];
 const CATS_TOGO = ["litros_medios","entradas","caliente","tiraditos","tortas","kids","postres","bebidas"];
 
@@ -810,7 +799,10 @@ const TEXT = {
     phoneError:"Escribe un teléfono de 10 a 15 dígitos.",required:"Completa este dato.",
     geoLoading:"Obteniendo ubicación…",geoOK:"Ubicación agregada. Verifica el punto de entrega.",
     geoError:"No se pudo obtener tu ubicación. Escribe la dirección o pega un enlace de Maps.",
-    category:"Categorías del menú",chat:"Contactar por WhatsApp"
+    category:"Categorías del menú",chat:"Contactar por WhatsApp",
+    sentTitle:"Pedido enviado",
+    sentDesc:"Consulte el chat en WhatsApp",
+    backMenu:"VOLVER AL MENÚ"
   },
   en:{
     heroLabel:"YOUR NEXT CRAVING STARTS HERE",
@@ -847,7 +839,10 @@ const TEXT = {
     phoneError:"Enter a phone number with 10 to 15 digits.",required:"Please complete this field.",
     geoLoading:"Getting your location…",geoOK:"Location added. Check the delivery point.",
     geoError:"Could not access your location. Type your address or paste a Maps link.",
-    category:"Menu categories",chat:"Contact via WhatsApp"
+    category:"Menu categories",chat:"Contact via WhatsApp",
+    sentTitle:"Order sent",
+    sentDesc:"Please check the chat on WhatsApp",
+    backMenu:"BACK TO MENU"
   }
 };
 
@@ -1125,6 +1120,8 @@ function renderCart(){
   }
 }
 document.querySelectorAll("[data-order]").forEach(button=>button.onclick=()=>{
+  $("orderSuccess").hidden=true;
+  $("orderBody").hidden=false;
   cartStep();renderCart();openDialog($("orderDialog"));$("closeOrder").focus();
 });
 $("continueOrder").onclick=()=>{
@@ -1133,6 +1130,15 @@ $("continueOrder").onclick=()=>{
 };
 $("back").onclick=()=>{cartStep();$("continueOrder").focus();};
 $("more").onclick=()=>{$("orderDialog").close();showView("menu");};
+
+$("closeSuccess").onclick=()=>{
+  $("orderDialog").close();
+  $("orderSuccess").hidden=true;
+  $("orderBody").hidden=false;
+  cartStep();
+  renderCart();
+  showView("menu");
+};
 
 CONFIG.sucursales.forEach(branch=>{
   const option=make("option","",branch.nombre);option.value=branch.id;$("branchSelect").append(option);
@@ -1188,7 +1194,17 @@ $("orderForm").addEventListener("submit",event=>{
   }
   if(value("notes"))message.push("Indicaciones: "+value("notes"));
   message.push("","Por favor confirma disponibilidad, costo final, formas de pago y tiempo de "+(delivery?"entrega.":"recolección."));
-  window.location.assign(wa(message.join("\n")));
+  
+  // Abre WhatsApp sin cerrar la ventana actual
+  window.open(wa(message.join("\n")), "_blank");
+
+  // Vacía el pedido y muestra la ventana de confirmación
+  cart.clear();
+  orderId = "";
+  sync();
+  $("orderBody").hidden = true;
+  $("orderSuccess").hidden = false;
+  $("closeSuccess").focus();
 });
 
 $("useLocation").onclick=()=>{
