@@ -171,9 +171,16 @@ h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);font-weight:normal;m
   min-height:54px;display:inline-flex;align-items:center;justify-content:center;
   gap:10px;padding:12px 16px;border:1px solid var(--line);border-radius:16px;
   background:var(--paper);color:var(--ink);text-decoration:none;
-  font-size:15px;font-weight:700;
+  font-size:15px;font-weight:700;transition:all 0.2s ease;
 }
-.social-item svg{width:19px;height:19px;fill:currentColor;flex-shrink:0}
+.social-item svg{
+  width:22px;height:22px;fill:none;stroke:currentColor;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+.social-item.facebook:hover{color:#1877F2;border-color:#1877F2;}
+.social-item.instagram:hover{color:#E1306C;border-color:#E1306C;}
+.social-item.whatsapp:hover{color:#25D366;border-color:#25D366;}
+.social-item.tiktok:hover{color:#000000;border-color:#000000;}
 
 .button{
   min-height:48px;display:inline-flex;align-items:center;justify-content:center;
@@ -182,13 +189,21 @@ h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);font-weight:normal;m
 }
 .secondary{background:transparent;color:var(--green);border-color:var(--line)}
 footer{padding:25px 80px 35px 22px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:12px;line-height:1.8}
+
 .wa-float{
   position:fixed;bottom:23px;right:20px;z-index:30;
   width:54px;height:54px;display:grid;place-items:center;
-  background:#22C55E;border-radius:50%;color:white;box-shadow:0 8px 24px #0003;
+  background:#25D366;border-radius:50%;color:white;box-shadow:0 8px 24px #0003;
 }
-.wa-float svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.8}
+.wa-float svg{width:32px;height:32px;fill:currentColor;stroke:none;}
+
 .mobile-nav{display:none}
+.nav-icon{
+  width:22px;height:22px;margin:0 auto 5px;display:block;
+  fill:none;stroke:currentColor;stroke-width:1.8;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+
 dialog{
   padding:0;border:0;border-radius:25px;background:var(--paper);color:var(--ink);
   width:min(620px,calc(100% - 24px));max-height:90vh;max-height:90dvh;
@@ -246,7 +261,6 @@ legend{font-weight:700;margin-bottom:15px}
   }
   .mobile-nav button{padding:7px 3px;font-size:10px;min-height:53px;border-radius:14px}
   .mobile-nav button.active{background:#D5F0F3;color:var(--green)}
-  .nav-icon{display:block;font-size:20px;margin-bottom:5px}
   .wa-float{bottom:calc(95px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px}
   footer{padding:24px 20px calc(115px + env(safe-area-inset-bottom))}
   .toast{bottom:calc(155px + env(safe-area-inset-bottom))}
@@ -281,7 +295,7 @@ legend{font-weight:700;margin-bottom:15px}
       <button type="button" data-view="menu" class="active" data-t="menu">MENÚ</button>
       <button type="button" data-view="visit" data-t="visit">VISÍTANOS</button>
       <button type="button" data-order aria-haspopup="dialog">
-        <span data-t="order">MI PEDIDO</span>
+        <span data-t="order">PEDIDOS</span>
         <span class="count" data-count hidden></span>
       </button>
     </div>
@@ -332,20 +346,20 @@ legend{font-weight:700;margin-bottom:15px}
 
       <h3 class="social-title" data-t="followUs">SÍGUENOS Y CONTÁCTANOS</h3>
       <div class="social-grid">
-        <a id="facebook" class="social-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 22v-8.2h2.8l.4-3.2h-3.2V8.5c0-.9.3-1.6 1.6-1.6h1.7V4.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.3v3.2h2.8V22h3.4Z"/></svg>
+        <a id="facebook" class="social-item facebook" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
           <span>Facebook</span>
         </a>
-        <a id="instagram" class="social-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.7a3 3 0 1 1 3-3 3 3 0 0 1-3 3Zm6-7.9a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1ZM21.9 7.1a6.9 6.9 0 0 0-1.9-4.9A6.9 6.9 0 0 0 15.1.3C13.2.2 10.8.2 8.9.3A6.9 6.9 0 0 0 4 2.2 6.9 6.9 0 0 0 2.1 7.1c-.1 1.9-.1 4.3 0 6.2a6.9 6.9 0 0 0 1.9 4.9 6.9 6.9 0 0 0 4.9 1.9c1.9.1 4.3.1 6.2 0a6.9 6.9 0 0 0 4.9-1.9 6.9 6.9 0 0 0 1.9-4.9c.1-1.9.1-4.3 0-6.2Zm-2 7.8a5.1 5.1 0 0 1-2.9 2.9c-2 .8-6.7.6-8.9.6s-6.9.2-8.9-.6a5.1 5.1 0 0 1-2.9-2.9c-.8-2-.6-6.7-.6-8.9s-.2-6.9.6-8.9a5.1 5.1 0 0 1 2.9-2.9c2-.8 6.7-.6 8.9-.6s6.9-.2 8.9.6a5.1 5.1 0 0 1 2.9 2.9c.8 2 .6 6.7.6 8.9s.2 6.9-.6 8.9Z"/></svg>
+        <a id="instagram" class="social-item instagram" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
           <span>Instagram</span>
         </a>
-        <a id="contactWA" class="social-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.3-4A8 8 0 1 1 20 11.7Zm-11-3.7c.5-.3.8 0 1 .4l.6 1.3c.2.4 0 .6-.5 1.2.6 1.3 1.7 2.4 3.1 3l.8-.8c.2-.2.5-.2.8 0l1.3.6c.5.2.5.6.3 1-.5.8-1.2 1.1-2 1-3.4-.5-6.1-3.2-6.7-6.5-.1-.6.5-1 1.3-1.2Z"/></svg>
+        <a id="contactWA" class="social-item whatsapp" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
           <span>WhatsApp</span>
         </a>
-        <a id="tiktok" class="social-item" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 5.8A4.3 4.3 0 0 1 15.5 3h-3.1v12.4a2.6 2.6 0 1 1-1.8-2.5V9.7a5.8 5.8 0 1 0 5 5.7V9.4a7.3 7.3 0 0 0 4.3 1.4V7.7a4.3 4.3 0 0 1-3.3-1.9Z"/></svg>
+        <a id="tiktok" class="social-item tiktok" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
           <span>TikTok</span>
         </a>
       </div>
@@ -356,16 +370,24 @@ legend{font-weight:700;margin-bottom:15px}
 <footer>La Aguachilería<br><span data-t="footer">Menú digital · San Luis Potosí</span></footer>
 
 <a id="floatingWA" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.3-4A8 8 0 1 1 20 11.7Z"/>
-    <path d="M9 8c.5-.3.8 0 1 .4l.6 1.3c.2.4 0 .6-.5 1.2.6 1.3 1.7 2.4 3.1 3l.8-.8c.2-.2.5-.2.8 0l1.3.6c.5.2.5.6.3 1-.5.8-1.2 1.1-2 1-3.4-.5-6.1-3.2-6.7-6.5C7.6 8.6 8.2 8.2 9 8Z"/>
+  <svg viewBox="0 0 24 24">
+    <path d="M12.031 21.498L12 21.5c-1.616 0-3.197-.417-4.582-1.206l-4.996 1.31 1.332-4.87A9.444 9.444 0 012.5 12C2.5 6.762 6.762 2.5 12 2.5 17.238 2.5 21.5 6.762 21.5 12c0 5.238-4.262 9.5-9.469 9.498zm-4.704-2.616c1.378.815 2.99 1.258 4.673 1.258 4.49 0 8.14-3.65 8.14-8.14S16.49 3.86 12 3.86 3.86 7.51 3.86 12c0 1.745.545 3.42 1.558 4.81l-1.026 3.75 3.843-1.012l.092.054zM16.5 14.5c-.25-.125-1.488-.735-1.718-.82-.23-.084-.398-.125-.566.125-.168.25-.65 .82-.796.988-.146.168-.293.188-.543.063C11.5 14.3 10.165 13 9.24 11.5c-.146-.25-.015-.386.11-.51.112-.112.25-.292.375-.438.125-.146.167-.25.25-.417.083-.167.042-.313-.02-.438-.063-.125-.567-1.365-.776-1.87-.203-.49-.41-.424-.566-.432-.146-.008-.313-.008-.48-.008-.167 0-.438.062-.667.312C7 8.125 6.25 8.833 6.25 10.25c0 1.417 1.27 2.792 1.448 3.03.177.24 2.062 3.15 4.996 4.418.698.3 1.242.48 1.667.615.7.223 1.336.19 1.838.115.563-.083 1.73-.708 1.972-1.396.24-.688.24-1.282.167-1.407-.073-.125-.282-.208-.532-.333z" />
   </svg>
 </a>
 
 <nav class="mobile-nav" aria-label="Navegación móvil">
-  <button type="button" data-view="visit"><span class="nav-icon" aria-hidden="true">⌂</span><span data-t="visit">VISÍTANOS</span></button>
-  <button type="button" data-view="menu" class="active"><span class="nav-icon" aria-hidden="true">☰</span><span data-t="menu">MENÚ</span></button>
-  <button type="button" data-order aria-haspopup="dialog"><span class="nav-icon" aria-hidden="true">🛵</span><span data-t="order">MI PEDIDO</span><span class="count" data-count hidden></span></button>
+  <button type="button" data-view="visit">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+    <span data-t="visit">VISÍTANOS</span>
+  </button>
+  <button type="button" data-view="menu" class="active">
+    <svg class="nav-icon" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    <span data-t="menu">MENÚ</span>
+  </button>
+  <button type="button" data-order aria-haspopup="dialog">
+    <svg class="nav-icon" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+    <span data-t="order">PEDIDOS</span><span class="count" data-count hidden></span>
+  </button>
 </nav>
 
 <dialog id="orderDialog" aria-labelledby="orderTitle">
@@ -676,7 +698,7 @@ const MENU = [
 const TEXT = {
   es:{
     heroLabel:"EL ANTOJO TIENE DIRECCIÓN",
-    menu:"MENÚ",visit:"VISÍTANOS",order:"MI PEDIDO",
+    menu:"MENÚ",visit:"VISÍTANOS",order:"PEDIDOS",
     menuLabel:"AQUÍ EMPIEZA EL ANTOJO",menuTitle:"Nuestro menú",
     intro:"Elige la presentación de cada platillo y agrega la cantidad que prefieras. Confirmaremos tu pedido por WhatsApp.",
     currency:"Precios en pesos mexicanos · MXN",
@@ -712,7 +734,7 @@ const TEXT = {
   },
   en:{
     heroLabel:"YOUR NEXT CRAVING STARTS HERE",
-    menu:"MENU",visit:"VISIT US",order:"MY ORDER",
+    menu:"MENU",visit:"VISIT US",order:"ORDERS",
     menuLabel:"FIND YOUR NEXT FAVORITE",menuTitle:"Our menu",
     intro:"Choose a serving size or preparation and add your preferred quantity. We will confirm your order via WhatsApp.",
     currency:"Prices in Mexican pesos · MXN",
