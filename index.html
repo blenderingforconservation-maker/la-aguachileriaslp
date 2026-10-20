@@ -456,7 +456,7 @@ legend{font-weight:700;margin-bottom:15px}
 
 /* ============================================================
    ZONA EDITABLE
-   Datos y precios transcritos del texto aportado por el usuario.
+   Datos y precios transcritos fielmente de las fotografías.
    ============================================================ */
 const CONFIG = {
   nombre:"La Aguachilería",
@@ -489,15 +489,14 @@ const CONFIG = {
   ]
 };
 
-const FOTOS = {
-  // "aguachile-de-camaron":"images/Menu/otra-fotografia.jpg"
-};
+const FOTOS = {};
 
 const CATEGORIAS = {
+  togo:["Menú To Go","To Go Menu","🥡"],
   entradas:["Entradas","Starters","◉"],
   fresco:["Lo fresco","Fresh seafood","≈"],
   caliente:["Lo caliente","Hot dishes","♨"],
-  tiritados:["Tiritados","Tiritados","≈"],
+  tiraditos:["Tiraditos","Tiraditos","≈"],
   tortas:["Tortas","Tortas","◒"],
   tostadas:["Tostadas","Tostadas","◉"],
   kids:["Menú kids","Kids menu","☆"],
@@ -528,6 +527,43 @@ function P(categoria,nombre,nombreEn,opciones){
 }
 
 const MENU = [
+  /* ================== MENÚ TO GO (LITROS Y MEDIOS) ================== */
+  P("togo","Aguachile de mariscos (To Go)","Seafood aguachile (To Go)",[
+    variante("medio",280),variante("litro",520)
+  ]),
+  P("togo","Aguachile de cecina (To Go)","Cecina aguachile (To Go)",[
+    variante("medio",280),variante("litro",520)
+  ]),
+  P("togo","Aguachile de camarón (To Go)","Shrimp aguachile (To Go)",[
+    variante("medio",295),variante("litro",580)
+  ]),
+  P("togo","Aguachile de callo de hacha (To Go)","Scallop aguachile (To Go)",[
+    variante("medio",410),variante("litro",770)
+  ]),
+  P("togo","Aguachile vuelve a la vida (To Go)","Vuelve a la Vida aguachile (To Go)",[
+    variante("medio",380),variante("litro",700)
+  ]),
+  P("togo","Ceviche de pescado (To Go)","Fish ceviche (To Go)",[
+    ["½ L (Natural)","½ L (Classic)",250],
+    ["1 L (Natural)","1 L (Classic)",470],
+    ["½ L (Cremoso)","½ L (Creamy)",250],
+    ["1 L (Cremoso)","1 L (Creamy)",470]
+  ]),
+  P("togo","Coctel de camarón y surimi (To Go)","Shrimp and surimi cocktail (To Go)",[
+    variante("medio",280),variante("litro",520)
+  ]),
+  P("togo","Coctel de camarón y pulpo (To Go)","Shrimp and octopus cocktail (To Go)",[
+    variante("medio",300),variante("litro",540)
+  ]),
+  P("togo","Coctel vuelve a la vida (To Go)","Vuelve a la Vida cocktail (To Go)",[
+    variante("medio",380),variante("litro",700)
+  ]),
+  P("togo","Caldo de camarón (To Go)","Shrimp soup (To Go)",[
+    variante("medio",100),variante("litro",165)
+  ]),
+  P("togo","Michelada 1 Lt","1 L Michelada",125),
+
+  /* ================== ENTRADAS ================== */
   P("entradas","Dedos de queso","Cheese sticks",110),
   P("entradas","Tostilocos","Tostilocos",[
     ["Mariscos","Seafood",105],
@@ -536,58 +572,50 @@ const MENU = [
   ]),
   P("entradas","Papas a la francesa","French fries",90),
   P("entradas","Aros de calamar","Calamari rings",165),
-  P("entradas","Caldo de camarón","Shrimp soup",[
-    variante("regular",85),variante("medio",100),variante("litro",165)
-  ]),
+  P("entradas","Caldo de camarón","Shrimp soup",85),
 
+  /* ================== FRESCO ================== */
   P("fresco","Aguachile de mariscos","Seafood aguachile",[
-    variante("individual",190),variante("compartir",520),
-    variante("medio",280),variante("litro",520)
+    variante("individual",190),variante("compartir",520)
   ]),
   P("fresco","Aguachile de cecina","Cecina aguachile",[
-    variante("individual",190),variante("compartir",520),
-    variante("medio",280),variante("litro",520)
+    variante("individual",190),variante("compartir",520)
   ]),
   P("fresco","Aguachile de camarón","Shrimp aguachile",[
-    variante("individual",200),variante("compartir",550),
-    variante("medio",295),variante("litro",580)
+    variante("individual",200),variante("compartir",550)
   ]),
   P("fresco","Aguachile vuelve a la vida","Vuelve a la Vida aguachile",[
-    variante("individual",330),variante("compartir",670),
-    variante("medio",380),variante("litro",700)
+    variante("individual",330),variante("compartir",670)
   ]),
   P("fresco","Aguachile de callo de hacha","Scallop aguachile",[
-    variante("individual",295),variante("medio",410),variante("litro",770)
+    variante("individual",295)
   ]),
   P("fresco","Aguachile blanco de camarón al coco","White coconut shrimp aguachile",[
     variante("individual",215)
   ]),
   P("fresco","Ceviche de pescado natural","Classic fish ceviche",[
-    variante("individual",135),variante("compartir",395),
-    variante("medio",250),variante("litro",470)
+    variante("chico",135),variante("compartir",395)
   ]),
   P("fresco","Ceviche de pescado cremoso","Creamy fish ceviche",[
-    variante("individual",160),variante("compartir",420)
+    variante("chico",160),variante("compartir",420)
   ]),
   P("fresco","Ceviche de camarón cremoso","Creamy shrimp ceviche",[
-    variante("individual",175),variante("compartir",450)
+    variante("chico",175),variante("compartir",450)
   ]),
   P("fresco","Ceviche de camarón natural","Classic shrimp ceviche",[
-    variante("individual",165),variante("compartir",435)
+    variante("chico",165),variante("compartir",435)
   ]),
   P("fresco","Coctel de camarón y surimi","Shrimp and surimi cocktail",[
-    variante("chico",145),variante("grande",195),
-    variante("medio",280),variante("litro",520)
+    variante("chico",145),variante("grande",195)
   ]),
   P("fresco","Coctel de camarón y pulpo","Shrimp and octopus cocktail",[
-    variante("chico",170),variante("grande",220),
-    variante("medio",300),variante("litro",540)
+    variante("chico",170),variante("grande",220)
   ]),
   P("fresco","Coctel vuelve a la vida","Vuelve a la Vida cocktail",[
-    variante("chico",190),variante("grande",265),
-    variante("medio",380),variante("litro",700)
+    variante("chico",190),variante("grande",265)
   ]),
 
+  /* ================== CALIENTE ================== */
   P("caliente","Camarones Aguachileria","Aguachilería shrimp",210),
   P("caliente","Camarones al coco","Coconut shrimp",220),
   P("caliente","Camarones encobijados","Encobijados shrimp",240),
@@ -611,38 +639,43 @@ const MENU = [
     ["Atún","Tuna",235],["Pulpo","Octopus",280]
   ]),
   P("caliente","A la diabla","Diabla-style seafood",[
-    ["Atún","Tuna",210],["Pulpo","Octopus",270]
+    ["Camarones","Shrimp",210],["Pulpo","Octopus",270]
   ]),
   P("caliente","Al mojo de ajo","Garlic-style seafood",[
-    ["Atún","Tuna",210],["Pulpo","Octopus",270]
+    ["Camarones","Shrimp",210],["Pulpo","Octopus",270]
   ]),
   P("caliente","Al chipotle","Chipotle-style seafood",[
-    ["Atún","Tuna",210],["Pulpo","Octopus",270]
+    ["Camarones","Shrimp",210],["Pulpo","Octopus",270]
   ]),
 
-  P("tiritados","Tiritado de atún","Tuna tiritado",[["¼ L","¼ L",195]]),
-  P("tiritados","Tiritado de camarón","Shrimp tiritado",[["¼ L","¼ L",205]]),
-  P("tiritados","Tiritado de cecina","Cecina tiritado",[["¼ L","¼ L",195]]),
-  P("tiritados","Tiritado de callo de hacha","Scallop tiritado",[["¼ L","¼ L",285]]),
-  P("tiritados","Tiritado mar y tierra","Surf and turf tiritado",[["¼ L","¼ L",245]]),
-  P("tiritados","Tiritado mixto del mar","Mixed seafood tiritado",[["¼ L","¼ L",245]]),
+  /* ================== TIRADITOS ================== */
+  P("tiraditos","Tiradito de atún","Tuna tiradito",[["¼ L","¼ L",195]]),
+  P("tiraditos","Tiradito de camarón","Shrimp tiradito",[["¼ L","¼ L",205]]),
+  P("tiraditos","Tiradito de cecina","Cecina tiradito",[["¼ L","¼ L",195]]),
+  P("tiraditos","Tiradito de callo de hacha","Scallop tiradito",[["¼ L","¼ L",285]]),
+  P("tiraditos","Tiradito mar y tierra","Surf and turf tiradito",[["¼ L","¼ L",245]]),
+  P("tiraditos","Tiradito mixto del mar","Mixed seafood tiradito",[["¼ L","¼ L",245]]),
 
+  /* ================== TORTAS ================== */
   P("tortas","Torta de lomo con chicharrón","Pork loin and chicharrón torta",80),
   P("tortas","Torta ahogada de aguachile de mariscos","Drowned seafood aguachile torta",90),
   P("tortas","Torta de ceviche","Ceviche torta",80),
   P("tortas","Torta mar y tierra","Surf and turf torta",95),
   P("tortas","Torta de camarón con queso","Shrimp and cheese torta",105),
 
+  /* ================== TOSTADAS ================== */
   P("tostadas","Tostada de atún","Tuna tostada",85),
   P("tostadas","Tostada de aguachile","Aguachile tostada",80),
-  P("tostadas","Tostada de tiritado","Tiritado tostada",85),
+  P("tostadas","Tostada de tiradito","Tiradito tostada",85),
   P("tostadas","Tostada de marlin","Marlin tostada",85),
   P("tostadas","Tostada de callo de hacha","Scallop tostada",120),
   P("tostadas","Tostada de camarón y pulpo","Shrimp and octopus tostada",90),
   P("tostadas","Tostada de ceviche","Ceviche tostada",[
-    ["Natural","Classic",75],["Cremoso","Creamy",85]
+    ["Pescado (Natural o Cremoso)","Fish (Classic or Creamy)",75],
+    ["Camarón (Natural o Cremoso)","Shrimp (Classic or Creamy)",85]
   ]),
 
+  /* ================== KIDS ================== */
   P("kids","Nuggets de pollo con papas a la francesa","Chicken nuggets with fries",[
     ["6 piezas","6 pieces",115]
   ]),
@@ -650,11 +683,13 @@ const MENU = [
     ["6 piezas","6 pieces",125]
   ]),
 
+  /* ================== EXTRAS ================== */
   P("extras","Orden de aguacate","Avocado side",40),
   P("extras","Sriracha","Sriracha",40),
   P("extras","Totopos","Tortilla chips",40),
   P("extras","Aderezo extra","Extra dressing",40),
 
+  /* ================== POSTRES ================== */
   P("postres","Pay de plátano","Banana pie",90),
   P("postres","Pay de temporada","Seasonal pie",80),
   P("postres","Postre Aguachileria","Aguachilería dessert",[
@@ -662,6 +697,7 @@ const MENU = [
     ["Galleta y crema Lotus con nieve de vainilla","Lotus cookie and spread with vanilla ice cream",90]
   ]),
 
+  /* ================== BEBIDAS ================== */
   P("bebidas","Refrescos","Soft drinks",[["Familia Coca-Cola","Coca-Cola family",44]]),
   P("bebidas","Agua fresca","Agua fresca",[
     ["Horchata","Horchata",42],["Jamaica","Hibiscus",42],["Limón","Lime",42]
@@ -682,15 +718,12 @@ const MENU = [
   P("bebidas","Rusa","Rusa",49),
   P("bebidas","Café","Coffee",45),
   P("bebidas","Ultra","Ultra",[
-    ["Michelada","Michelada",53],["Con Clamato","With Clamato",63],["1 L","1 L",73]
+    ["Natural","Still",53],["Michelada","Michelada",63],["Con Clamato","With Clamato",73]
   ]),
   P("bebidas","Cerveza","Beer",[
-    ["Michelada","Michelada",48],["Con Clamato","With Clamato",58],["1 L","1 L",68]
+    ["Natural","Still",48],["Michelada","Michelada",58],["Con Clamato","With Clamato",68]
   ]),
-  P("bebidas","Michelada con agua mineral","Sparkling-water michelada",63),
-  P("bebidas","Michelada para llevar","Takeout michelada",[
-    ["1 L · Menú To Go","1 L · To Go menu",125]
-  ])
+  P("bebidas","Michelada con agua mineral","Sparkling-water michelada",63)
 ];
 
 /* ================= FIN DEL CATÁLOGO EDITABLE ================= */
