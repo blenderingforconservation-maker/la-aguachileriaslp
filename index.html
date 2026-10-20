@@ -70,6 +70,20 @@ a{color:inherit}
 main{padding-block:36px 65px;scroll-margin-top:85px}
 h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);font-weight:normal;margin:8px 0 15px}
 .lead{color:var(--muted);line-height:1.7;max-width:730px;font-size:15px}
+
+/* SELECTOR DE MODO DE MENÚ */
+.menu-modes{
+  display:flex;gap:8px;margin:20px 0;
+  background:#E4F2F4;padding:6px;border-radius:16px;border:1px solid var(--line);
+}
+.mode-btn{
+  flex:1;padding:14px;border:none;background:transparent;border-radius:12px;
+  font-weight:700;color:var(--muted);font-size:15px;transition:all 0.2s;
+}
+.mode-btn.active{
+  background:var(--green);color:white;box-shadow:0 4px 12px #004c5420;
+}
+
 .menu-tools{display:flex;align-items:center;gap:20px;justify-content:space-between;margin-top:24px}
 .search{
   width:min(100%,330px);padding:13px 16px;min-height:46px;
@@ -81,7 +95,7 @@ h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);font-weight:normal;m
 .filter{
   flex-shrink:0;min-height:43px;border:1px solid var(--line);
   border-radius:99px;background:var(--paper);color:var(--ink);
-  padding:10px 16px;font-size:12px;font-weight:700;
+  padding:10px 16px;font-size:13px;font-weight:700;
 }
 .filter.active{background:var(--green);color:white;border-color:var(--green)}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
@@ -99,8 +113,8 @@ h2{font-family:Georgia,serif;font-size:clamp(34px,5vw,48px);font-weight:normal;m
 .placeholder span{display:block;font-size:38px;margin-bottom:10px}
 .placeholder strong{font-family:Georgia,serif;font-size:21px;font-weight:normal}
 .content{padding:20px;flex:1}
-.category-label{font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
-.card h3{font-family:Georgia,serif;font-size:25px;font-weight:normal;line-height:1.2;margin:9px 0 12px}
+.category-label{font-size:11px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+.card h3{font-family:Georgia,serif;font-size:23px;font-weight:normal;line-height:1.2;margin:9px 0 12px}
 .card-description{font-size:13px;line-height:1.6;color:var(--muted)}
 .variant-label{display:block;font-size:11px;color:var(--muted);margin-top:16px}
 .variant-label select{
@@ -249,6 +263,7 @@ legend{font-weight:700;margin-bottom:15px}
   .hero p{font-size:17px}
   .desktop-nav{display:none}
   main{scroll-margin-top:15px}
+  .menu-modes{flex-direction:column;gap:4px;margin:15px 0}
   .menu-tools{display:block}
   .search{width:100%;max-width:none}
   .currency{margin-top:14px}
@@ -307,6 +322,12 @@ legend{font-weight:700;margin-bottom:15px}
     <span class="kicker" data-t="menuLabel">AQUÍ EMPIEZA EL ANTOJO</span>
     <h2 data-t="menuTitle">Nuestro menú</h2>
     <p class="lead" data-t="intro">Elige la presentación de cada platillo y agrega la cantidad que prefieras. Confirmaremos tu pedido por WhatsApp.</p>
+    
+    <div class="menu-modes" aria-label="Modalidad de pedido">
+      <button id="btnRest" type="button" class="mode-btn active" data-mode="restaurante">🍽️ Para comer aquí</button>
+      <button id="btnToGo" type="button" class="mode-btn" data-mode="togo">🛍️ Para llevar</button>
+    </div>
+
     <div class="menu-tools">
       <input id="search" class="search" type="search" aria-label="Buscar platillos" placeholder="Buscar un platillo…">
       <span class="currency" data-t="currency">Precios en pesos mexicanos · MXN</span>
@@ -456,12 +477,11 @@ legend{font-weight:700;margin-bottom:15px}
 
 /* ============================================================
    ZONA EDITABLE
-   Datos y precios transcritos fielmente de las fotografías.
    ============================================================ */
 const CONFIG = {
   nombre:"La Aguachilería",
   whatsapp:"524444229190",
-  facebook:"https://www.facebook.com/",
+  facebook:"https://www.facebook.com/profile.php?id=100064088500124",
   instagram:"https://www.instagram.com/aguachileria/",
   tiktok:"https://www.tiktok.com/",
   lema:"Con #aguachileria la vida es más Sabrosa",
@@ -492,18 +512,22 @@ const CONFIG = {
 const FOTOS = {};
 
 const CATEGORIAS = {
-  togo:["Menú To Go","To Go Menu","🥡"],
-  entradas:["Entradas","Starters","◉"],
-  fresco:["Lo fresco","Fresh seafood","≈"],
-  caliente:["Lo caliente","Hot dishes","♨"],
-  tiraditos:["Tiraditos","Tiraditos","≈"],
-  tortas:["Tortas","Tortas","◒"],
-  tostadas:["Tostadas","Tostadas","◉"],
-  kids:["Menú kids","Kids menu","☆"],
-  extras:["Extras","Extras","+"],
-  postres:["Postres","Desserts","♡"],
-  bebidas:["Bebidas","Drinks","◡"]
+  litros_medios:["Litros y Medios","Liters & Halves","🦐"],
+  entradas:["Entradas","Starters","🦪"],
+  fresco:["Lo fresco","Fresh seafood","🐟"],
+  caliente:["Lo caliente","Hot dishes","🐙"],
+  tiraditos:["Tiraditos","Tiraditos","🐠"],
+  tortas:["Tortas","Tortas","🦀"],
+  tostadas:["Tostadas","Tostadas","🐚"],
+  kids:["Menú kids","Kids menu","🐡"],
+  extras:["Extras","Extras","🥑"],
+  postres:["Postres","Desserts","🍰"],
+  bebidas:["Bebidas","Drinks","🍹"]
 };
+
+// Categorías según el modo de pedido seleccionado
+const CATS_RESTAURANTE = ["entradas","fresco","caliente","tiraditos","tortas","tostadas","kids","extras","postres","bebidas"];
+const CATS_TOGO = ["litros_medios","entradas","caliente","tiraditos","tortas","kids","postres","bebidas"];
 
 const V = {
   regular:["Porción","Serving"],
@@ -527,41 +551,41 @@ function P(categoria,nombre,nombreEn,opciones){
 }
 
 const MENU = [
-  /* ================== MENÚ TO GO (LITROS Y MEDIOS) ================== */
-  P("togo","Aguachile de mariscos (To Go)","Seafood aguachile (To Go)",[
+  /* ================== LITROS Y MEDIOS (PARA LLEVAR) ================== */
+  P("litros_medios","Aguachile de mariscos","Seafood aguachile",[
     variante("medio",280),variante("litro",520)
   ]),
-  P("togo","Aguachile de cecina (To Go)","Cecina aguachile (To Go)",[
+  P("litros_medios","Aguachile de cecina","Cecina aguachile",[
     variante("medio",280),variante("litro",520)
   ]),
-  P("togo","Aguachile de camarón (To Go)","Shrimp aguachile (To Go)",[
+  P("litros_medios","Aguachile de camarón","Shrimp aguachile",[
     variante("medio",295),variante("litro",580)
   ]),
-  P("togo","Aguachile de callo de hacha (To Go)","Scallop aguachile (To Go)",[
+  P("litros_medios","Aguachile de callo de hacha","Scallop aguachile",[
     variante("medio",410),variante("litro",770)
   ]),
-  P("togo","Aguachile vuelve a la vida (To Go)","Vuelve a la Vida aguachile (To Go)",[
+  P("litros_medios","Aguachile vuelve a la vida","Vuelve a la Vida aguachile",[
     variante("medio",380),variante("litro",700)
   ]),
-  P("togo","Ceviche de pescado (To Go)","Fish ceviche (To Go)",[
+  P("litros_medios","Ceviche de pescado","Fish ceviche",[
     ["½ L (Natural)","½ L (Classic)",250],
     ["1 L (Natural)","1 L (Classic)",470],
     ["½ L (Cremoso)","½ L (Creamy)",250],
     ["1 L (Cremoso)","1 L (Creamy)",470]
   ]),
-  P("togo","Coctel de camarón y surimi (To Go)","Shrimp and surimi cocktail (To Go)",[
+  P("litros_medios","Coctel de camarón y surimi","Shrimp and surimi cocktail",[
     variante("medio",280),variante("litro",520)
   ]),
-  P("togo","Coctel de camarón y pulpo (To Go)","Shrimp and octopus cocktail (To Go)",[
+  P("litros_medios","Coctel de camarón y pulpo","Shrimp and octopus cocktail",[
     variante("medio",300),variante("litro",540)
   ]),
-  P("togo","Coctel vuelve a la vida (To Go)","Vuelve a la Vida cocktail (To Go)",[
+  P("litros_medios","Coctel vuelve a la vida","Vuelve a la Vida cocktail",[
     variante("medio",380),variante("litro",700)
   ]),
-  P("togo","Caldo de camarón (To Go)","Shrimp soup (To Go)",[
+  P("litros_medios","Caldo de camarón","Shrimp soup",[
     variante("medio",100),variante("litro",165)
   ]),
-  P("togo","Michelada 1 Lt","1 L Michelada",125),
+  P("litros_medios","Michelada 1 Lt","1 L Michelada",125),
 
   /* ================== ENTRADAS ================== */
   P("entradas","Dedos de queso","Cheese sticks",110),
@@ -734,6 +758,7 @@ const TEXT = {
     menu:"MENÚ",visit:"VISÍTANOS",order:"PEDIDOS",
     menuLabel:"AQUÍ EMPIEZA EL ANTOJO",menuTitle:"Nuestro menú",
     intro:"Elige la presentación de cada platillo y agrega la cantidad que prefieras. Confirmaremos tu pedido por WhatsApp.",
+    modeRest:"Para comer aquí", modeToGo:"Para llevar",
     currency:"Precios en pesos mexicanos · MXN",
     noResults:"No encontramos platillos con esa búsqueda.",
     visitLabel:"VISÍTANOS",visitTitle:"Tu próxima mesa empieza aquí",
@@ -770,6 +795,7 @@ const TEXT = {
     menu:"MENU",visit:"VISIT US",order:"ORDERS",
     menuLabel:"FIND YOUR NEXT FAVORITE",menuTitle:"Our menu",
     intro:"Choose a serving size or preparation and add your preferred quantity. We will confirm your order via WhatsApp.",
+    modeRest:"Dine-in", modeToGo:"Takeout / Delivery",
     currency:"Prices in Mexican pesos · MXN",
     noResults:"No dishes match your search.",
     visitLabel:"VISIT US",visitTitle:"Your next table starts here",
@@ -810,7 +836,7 @@ const make = (tag,cls,text) => {
   if(text!==undefined) node.textContent=text;
   return node;
 };
-let lang="es",category="",orderId="",activeBranchIndex=0,toastTimer;
+let lang="es",category="",orderId="",activeBranchIndex=0,menuMode="restaurante",toastTimer;
 const cart=new Map();
 const selected=new Map();
 const lookup=new Map(MENU.map(p=>[p.id,p]));
@@ -845,6 +871,18 @@ function showView(view,changeHash=true,scroll=true){
   });
 }
 document.querySelectorAll("[data-view]").forEach(b=>b.onclick=()=>showView(b.dataset.view));
+
+$("btnRest").onclick = () => setMenuMode("restaurante");
+$("btnToGo").onclick = () => setMenuMode("togo");
+
+function setMenuMode(mode){
+  menuMode = mode;
+  $("btnRest").classList.toggle("active", mode === "restaurante");
+  $("btnToGo").classList.toggle("active", mode === "togo");
+  category = ""; 
+  renderFilters();
+  renderProducts();
+}
 
 function openDialog(dialog){
   dialog.showModal();document.body.classList.add("locked");
@@ -899,8 +937,18 @@ function sync(){
 }
 function renderFilters(){
   const nav=$("filters");nav.replaceChildren();
-  ["",...Object.keys(CATEGORIAS)].forEach(id=>{
-    const button=make("button","filter",id?CATEGORIAS[id][lang==="es"?0:1]:t("all"));
+  const catsList = menuMode === "restaurante" ? CATS_RESTAURANTE : CATS_TOGO;
+
+  const btnAll = make("button","filter",t("all"));
+  btnAll.type="button";
+  btnAll.classList.toggle("active",category==="");
+  btnAll.onclick=()=>{ category=""; renderFilters(); renderProducts(); };
+  nav.append(btnAll);
+
+  catsList.forEach(id=>{
+    const textLabel = CATEGORIAS[id][lang==="es"?0:1];
+    const emoji = CATEGORIAS[id][2];
+    const button=make("button","filter", emoji + " " + textLabel);
     button.type="button";
     button.classList.toggle("active",category===id);
     button.setAttribute("aria-pressed",String(category===id));
@@ -918,14 +966,20 @@ function renderFilters(){
 function renderProducts(){
   const grid=$("products");grid.replaceChildren();
   const query=normalize($("search").value.trim());
+  
   const visible=MENU.filter(p=>{
+    if(menuMode === "restaurante" && p.categoria === "litros_medios") return false;
+    if(menuMode === "togo" && ["fresco", "tostadas", "extras"].includes(p.categoria)) return false;
+
     const haystack=normalize([
       p.nombre,p.nombreEn,...CATEGORIAS[p.categoria],
       ...p.variantes.flatMap(v=>[v[0],v[1]])
     ].join(" "));
     return (!category||p.categoria===category)&&(!query||haystack.includes(query));
   });
+  
   $("empty").hidden=visible.length>0;
+  
   visible.forEach(p=>{
     const card=make("article","card");
     const photo=make("button","photo");
@@ -947,8 +1001,9 @@ function renderProducts(){
       openDialog($("photoDialog"));
     };
     const content=make("div","content");
+    const catLabel = CATEGORIAS[p.categoria][lang==="es"?0:1];
     content.append(
-      make("span","category-label",CATEGORIAS[p.categoria][lang==="es"?0:1]),
+      make("span","category-label",catLabel),
       make("h3","",name(p))
     );
     let index=selected.get(p.id)||0;
@@ -1130,6 +1185,10 @@ function applyLanguage(){
   document.documentElement.lang=lang;
   document.title=CONFIG.nombre+" | "+t("menuTitle");
   document.querySelectorAll("[data-t]").forEach(node=>node.textContent=t(node.dataset.t));
+  
+  $("btnRest").innerHTML = "🍽️ " + t("modeRest");
+  $("btnToGo").innerHTML = "🛍️ " + t("modeToGo");
+
   $("language").textContent=lang==="es"?"English · EN":"Español · ES";
   $("language").setAttribute("aria-label",lang==="es"?"Switch to English":"Cambiar a español");
   $("slogan").textContent=lang==="es"?CONFIG.lema:CONFIG.lemaEn;
