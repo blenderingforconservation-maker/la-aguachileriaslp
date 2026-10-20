@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#174F42">
+<meta name="description" content="La Aguachilería, San Luis Potosí. Consulta nuestro menú, encuentra tu sucursal y solicita tu pedido por WhatsApp.">
+<title>La Aguachilería | Menú</title>
+
+<style>
+:root{
+  --fondo:#F7F4E9;
+  --papel:#FFFDF7;
+  --texto:#173D34;
+  --suave:#586B60;
+  --verde:#174F42;
+  --verde-oscuro:#10382F;
+  --lima:#D9EC9D;
+  --coral:#AC422D;
+  --linea:#D8DFCE;
+  --radio:24px;
+  --sombra:0 14px 36px #14392b0c;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;background:var(--fondo)}
+body{
+  margin:0;color:var(--texto);background:var(--fondo);
+  font-family:Arial,Helvetica,sans-serif;
+}
+body.modal-abierto{overflow:hidden}
+button,input,select,textarea{font:inherit}
+button,a,input,select,textarea{-webkit-tap-highlight-color:transparent}
+button,a{touch-action:manipulation}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.45}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:4px}
+img{max-width:100%}
+button,a{transition:background .18s,transform .18s}
+button:hover:not(:disabled){transform:translateY(-1px)}
+.wrap{width:min(1180px,100%);margin:auto;padding-inline:24px}
+.eyebrow{
+  font-size:11px;line-height:1.5;letter-spacing:2px;
+  font-weight:800;text-transform:uppercase;
+}
+.hero{
+  position:relative;isolation:isolate;overflow:hidden;
+  color:var(--papel);background:var(--verde);padding-bottom:58px;
+}
+.hero::before{
+  content:"";position:absolute;z-index:-1;width:620px;height:620px;
+  right:-250px;top:20px;border:1px solid #d9ec9d38;border-radius:50%;
+  box-shadow:0 0 0 65px #d9ec9d09,0 0 0 130px #d9ec9d09;
+}
+.hero-photo{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;z-index:-3;
+}
+.hero.has-photo::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,#10382feb,#10382f70);z-index:-2;
+}
+.topline{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:16px;padding-block:22px;
+}
+.brand-label{font-size:11px;letter-spacing:1.5px;font-weight:800}
+.language{
+  border:1px solid #ffffff65;background:transparent;color:white;
+  padding:10px 15px;border-radius:99px;min-height:42px;
+}
+.hero-content{padding-block:46px 20px;max-width:850px}
+.hero h1{
+  font-family:Georgia,serif;font-weight:normal;
+  font-size:clamp(49px,8.8vw,108px);line-height:.98;
+  letter-spacing:-3px;margin:20px 0 24px;overflow-wrap:break-word;
+}
+.hero p{font-size:clamp(17px,2.2vw,23px);line-height:1.6;max-width:610px}
+.hero .eyebrow{color:var(--lima)}
+.hero-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;padding:10px 15px;
+  border:1px solid #ffffff40;border-radius:99px;font-size:12px;
+}
+.dot{height:7px;width:7px;background:var(--lima);border-radius:50%}
+.navbar{
+  position:sticky;top:0;z-index:20;background:var(--fondo);
+  border-bottom:1px solid var(--linea);
+}
+.nav-inner{
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;min-height:76px;
+}
+.nav-brand{font-family:Georgia,serif;font-size:23px}
+.nav-actions{display:flex;gap:6px}
+.nav-actions button,.mobile-nav button{
+  border:0;background:transparent;color:var(--suave);
+  font-size:12px;font-weight:800;border-radius:99px;padding:13px 19px;
+}
+.nav-actions button.active{background:var(--verde);color:white}
+.count{
+  display:inline-grid;place-items:center;min-width:21px;min-height:21px;
+  border-radius:50%;background:var(--coral);color:white;font-size:11px;
+  margin-left:5px;padding:2px 5px;
+}
+main{min-height:380px;padding-block:42px 64px}
+.section-head{display:flex;justify-content:space-between;gap:24px;align-items:end}
+h2{
+  font-family:Georgia,serif;font-size:clamp(32px,4.5vw,48px);
+  line-height:1.1;font-weight:normal;margin:8px 0 16px;
+}
+.section-head p,.muted{color:var(--suave);line-height:1.7}
+.section-head p{max-width:610px}
+.small-note{font-size:12px;white-space:nowrap}
+.filters{
+  display:flex;gap:8px;overflow:auto;padding:18px 0 25px;
+  scrollbar-width:thin;
+}
+.filter{
+  flex-shrink:0;border:1px solid var(--linea);border-radius:99px;
+  background:var(--papel);color:var(--texto);padding:12px 18px;
+  min-height:44px;font-size:13px;
+}
+.filter.active{background:var(--verde);color:white;border-color:var(--verde)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.card{
+  min-width:0;overflow:hidden;border:1px solid var(--linea);
+  border-radius:var(--radio);background:var(--papel);
+  box-shadow:var(--sombra);display:flex;flex-direction:column;
+}
+.photo{
+  aspect-ratio:4/3;position:relative;display:grid;place-items:center;
+  width:100%;border:0;background:#E8EDDD;color:var(--verde);
+  padding:0;overflow:hidden;
+}
+.photo img{width:100%;height:100%;object-fit:contain;position:absolute;inset:0}
+.photo:disabled{opacity:1}
+.photo-placeholder{font-family:Georgia,serif;font-size:20px;padding:24px;text-align:center}
+.card-info{padding:21px;flex:1}
+.card-title{display:flex;justify-content:space-between;align-items:start;gap:12px}
+.card h3{font-family:Georgia,serif;font-size:25px;font-weight:normal;margin:0}
+.price{font-size:15px;font-weight:800;color:var(--coral);text-align:right}
+.description{font-size:14px;line-height:1.65;color:var(--suave);margin-bottom:0}
+.quantity{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  border-top:1px solid var(--linea);padding-top:14px;margin:0 21px 20px;
+  font-size:13px;
+}
+.stepper{display:flex;align-items:center;gap:10px}
+.stepper button{
+  width:43px;height:43px;border:1px solid var(--linea);border-radius:13px;
+  background:var(--papel);color:var(--verde);font-size:23px;
+}
+.stepper output{min-width:20px;text-align:center;font-weight:bold}
+.empty{
+  border:1px solid var(--linea);border-radius:var(--radio);
+  padding:clamp(26px,5vw,60px);background:var(--papel);
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:28px;
+}
+.empty h3{font-family:Georgia,serif;font-weight:normal;font-size:32px;margin:0}
+.empty p{max-width:600px;color:var(--suave);line-height:1.7}
+.button{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:48px;padding:13px 20px;border:1px solid transparent;
+  border-radius:14px;background:var(--verde);color:white;
+  font-weight:700;font-size:13px;text-decoration:none;text-align:center;
+}
+.button.secondary{background:transparent;color:var(--verde);border-color:var(--linea)}
+.button.lime{background:var(--lima);color:var(--verde-oscuro)}
+.visit-intro{max-width:700px;margin-bottom:30px}
+.branches{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.branch{
+  padding:28px;border:1px solid var(--linea);border-radius:var(--radio);
+  background:var(--papel);box-shadow:var(--sombra);
+}
+.branch-number{color:var(--coral);font-size:12px;letter-spacing:2px;font-weight:800}
+.branch h3{font-family:Georgia,serif;font-size:32px;font-weight:normal;margin:18px 0 10px}
+.branch p{color:var(--suave);line-height:1.7}
+.branch .button{margin-top:12px}
+.visit-bottom{
+  margin-top:25px;background:var(--verde);color:white;
+  padding:30px;border-radius:var(--radio);
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+}
+.visit-bottom p{line-height:1.7}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+.visit-bottom .secondary{border-color:#ffffff60;color:white}
+footer{
+  border-top:1px solid var(--linea);padding:25px 24px 35px;
+  font-size:12px;color:var(--suave);text-align:center;line-height:1.8;
+}
+.mobile-nav{display:none}
+.floating-wa{
+  position:fixed;right:22px;bottom:24px;width:54px;height:54px;z-index:30;
+  display:grid;place-items:center;border-radius:50%;background:#147B42;
+  color:white;box-shadow:0 8px 25px #0002;text-decoration:none;
+}
+.floating-wa svg{width:29px;height:29px;fill:none;stroke:currentColor;stroke-width:1.8}
+.overlay{
+  position:fixed;inset:0;background:#09251ec7;z-index:80;
+  display:grid;place-items:center;padding:18px;
+}
+.dialog{
+  width:min(600px,100%);max-height:90vh;max-height:90dvh;
+  overflow:auto;overscroll-behavior:contain;padding:26px;
+  border-radius:26px;background:var(--papel);box-shadow:0 30px 90px #0004;
+}
+.dialog-head{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.dialog-head h2{font-size:34px;margin:0}
+.close{
+  flex-shrink:0;width:44px;height:44px;border:1px solid var(--linea);
+  border-radius:50%;background:transparent;color:var(--texto);font-size:27px;
+}
+.cart-row{padding:17px 0;border-bottom:1px solid var(--linea)}
+.cart-row-head{display:flex;justify-content:space-between;gap:15px;line-height:1.5}
+.cart-row .quantity{margin:12px 0 0;padding:0;border:0}
+.totals{padding:15px 0}
+.totals div{display:flex;justify-content:space-between;gap:15px;margin:12px 0;font-size:14px}
+.totals .total{font-size:18px;font-weight:bold}
+.full{width:100%;margin-top:10px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.field{display:block;font-size:13px;line-height:1.5}
+.field input,.field select,.field textarea{
+  display:block;width:100%;margin-top:6px;padding:12px;
+  min-height:46px;border:1px solid var(--linea);border-radius:12px;
+  background:white;color:var(--texto);font-size:16px;
+}
+.wide{grid-column:1/-1}
+fieldset{border:0;padding:0;margin:20px 0;min-width:0}
+legend{font-weight:bold;margin-bottom:15px}
+.hint{color:var(--suave);font-size:12px;line-height:1.7}
+.photo-dialog{position:relative;width:min(1000px,100%);text-align:center}
+.photo-dialog img{max-height:80vh;max-height:80dvh;object-fit:contain}
+.photo-dialog .close{position:absolute;right:0;top:-48px;background:var(--papel)}
+.toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%);
+  z-index:100;max-width:calc(100% - 32px);width:max-content;
+  border-radius:14px;background:var(--verde-oscuro);color:white;
+  padding:14px 18px;font-size:13px;box-shadow:0 8px 25px #0003;
+}
+@media(min-width:761px){footer{padding-right:90px}}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){
+  .wrap{padding-inline:18px}
+  .hero{padding-bottom:32px}
+  .hero-content{padding-top:26px}
+  .hero h1{letter-spacing:-2px;font-size:clamp(47px,12vw,78px)}
+  .brand-label{font-size:9px;letter-spacing:1px}
+  .navbar{display:none}
+  main{padding-top:28px}
+  .section-head{display:block}
+  .small-note{white-space:normal}
+  .empty,.branches{grid-template-columns:1fr}
+  .empty .button{width:100%}
+  .visit-bottom{display:block}
+  .socials{margin-top:18px}
+  .mobile-nav{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:5px;
+    position:fixed;z-index:35;left:10px;right:10px;
+    bottom:calc(10px + env(safe-area-inset-bottom));
+    padding:7px;background:var(--papel);border:1px solid var(--linea);
+    border-radius:22px;box-shadow:0 10px 40px #0002;
+  }
+  .mobile-nav button{padding:8px 3px;border-radius:15px;font-size:10px;min-height:51px}
+  .mobile-nav button.active{background:#E7EDD9;color:var(--verde)}
+  .nav-icon{display:block;font-size:20px;margin-bottom:4px}
+  .floating-wa{bottom:calc(94px + env(safe-area-inset-bottom));right:16px;width:48px;height:48px}
+  footer{padding-bottom:calc(115px + env(safe-area-inset-bottom))}
+  .toast{bottom:calc(155px + env(safe-area-inset-bottom))}
+}
+@media(max-width:540px){
+  .grid{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .dialog{padding:20px}
+  .overlay{padding:10px}
+  .branch{padding:23px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *{transition:none!important}
+}
+</style>
+</head>
+
+<body>
+<header class="hero" id="hero">
+  <img class="hero-photo" id="heroPhoto" alt="" hidden>
+  <div class="wrap">
+    <div class="topline">
+      <span class="brand-label" data-t="brandLabel">MARISCOS · SAN LUIS POTOSÍ</span>
+      <button class="language" id="language" type="button">English · EN</button>
+    </div>
+    <div class="hero-content">
+      <span class="eyebrow" data-t="heroKicker">EL ANTOJO TIENE DIRECCIÓN</span>
+      <h1 id="restaurantName">La Aguachilería</h1>
+      <p id="slogan">Con #aguachileria la vida es más Sabrosa</p>
+      <div class="hero-meta">
+        <span class="pill"><span class="dot" aria-hidden="true"></span><span data-t="daily">Abierto todos los días</span></span>
+        <span class="pill" data-t="twoBranches">Dos sucursales en SLP</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="navbar">
+  <nav class="wrap nav-inner" aria-label="Principal">
+    <span class="nav-brand">La Aguachilería</span>
+    <div class="nav-actions">
+      <button type="button" data-view="menu" class="active" data-t="menu">MENÚ</button>
+      <button type="button" data-view="visit" data-t="visit">VISÍTANOS</button>
+      <button type="button" data-order aria-haspopup="dialog">
+        <span data-t="order">MI PEDIDO</span>
+        <span class="count" data-count hidden>0</span>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<main class="wrap" id="main">
+  <section id="menuView">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow" data-t="menuKicker">AQUÍ EMPIEZA EL ANTOJO</span>
+        <h2 data-t="menuTitle">Nuestro menú</h2>
+        <p data-t="menuIntro">Elige tus favoritos y prepara tu pedido. Nosotros lo confirmamos por WhatsApp.</p>
+      </div>
+      <p class="small-note" id="currencyNote" data-t="currency">Precios en pesos mexicanos · MXN</p>
+    </div>
+    <nav class="filters" id="filters" aria-label="Categorías"></nav>
+    <div class="grid" id="products"></div>
+    <div class="empty" id="emptyMenu" hidden>
+      <div>
+        <h3 data-t="emptyTitle">¿Qué se te antoja hoy?</h3>
+        <p data-t="emptyText">Solicita nuestra carta y consulta los platillos, precios y disponibilidad directamente por WhatsApp.</p>
+      </div>
+      <a class="button" id="requestMenu" target="_blank" rel="noopener noreferrer" data-t="requestMenu">CONSULTAR LA CARTA</a>
+    </div>
+  </section>
+
+  <section id="visitView" hidden>
+    <div class="visit-intro">
+      <span class="eyebrow" data-t="visitKicker">NOS VEMOS EN LA AGUACHILERÍA</span>
+      <h2 data-t="branchesTitle">Dos direcciones. El mismo antojo.</h2>
+      <p class="muted" data-t="visitIntro">Visítanos en San Luis Potosí. Abrimos todos los días; consulta los horarios de cada sucursal por WhatsApp.</p>
+    </div>
+    <div class="branches" id="branches"></div>
+    <div class="visit-bottom">
+      <div>
+        <span class="eyebrow" data-t="contact">PEDIDOS Y CONSULTAS</span>
+        <p id="phoneDisplay"></p>
+      </div>
+      <div class="socials">
+        <a id="visitWA" class="button lime" target="_blank" rel="noopener noreferrer">WhatsApp ↗</a>
+        <a id="instagram" class="button secondary" target="_blank" rel="noopener noreferrer">Instagram ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span id="footerName"></span><br>
+  <span data-t="footer">Menú digital · San Luis Potosí</span>
+</footer>
+
+<a id="floatingWA" class="floating-wa" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M20 11.7a8 8 0 0 1-11.8 7L4 20l1.3-4A8 8 0 1 1 20 11.7Z"/>
+    <path d="M9 8c.5-.3.8 0 1 .4l.6 1.3c.2.4 0 .6-.5 1.2.6 1.3 1.7 2.4 3.1 3l.8-.8c.2-.2.5-.2.8 0l1.3.6c.5.2.5.6.3 1-.5.8-1.2 1.1-2 1-3.4-.5-6.1-3.2-6.7-6.5C7.6 8.6 8.2 8.2 9 8Z"/>
+  </svg>
+</a>
+
+<nav class="mobile-nav" aria-label="Navegación móvil">
+  <button type="button" data-view="menu" class="active">
+    <span class="nav-icon" aria-hidden="true">☰</span>
+    <span data-t="menu">MENÚ</span>
+  </button>
+  <button type="button" data-view="visit">
+    <span class="nav-icon" aria-hidden="true">⌂</span>
+    <span data-t="visit">VISÍTANOS</span>
+  </button>
+  <button type="button" data-order aria-haspopup="dialog">
+    <span class="nav-icon" aria-hidden="true">🛵</span>
+    <span data-t="order">MI PEDIDO</span>
+    <span class="count" data-count hidden>0</span>
+  </button>
+</nav>
+
+<div id="orderOverlay" class="overlay" hidden>
+  <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+    <div class="dialog-head">
+      <h2 id="orderTitle" data-t="orderTitle">Mi pedido</h2>
+      <button type="button" class="close" id="closeOrder" aria-label="Cerrar">×</button>
+    </div>
+    <p class="hint" data-t="review">Revisa tus productos y cantidades.</p>
+    <div id="cartRows"></div>
+
+    <div class="totals" aria-live="polite">
+      <div><span data-t="subtotal">Productos</span><strong id="subtotal"></strong></div>
+      <div><span data-t="shipping">Envío</span><strong id="shipping"></strong></div>
+      <div class="total"><span data-t="total">Total</span><strong id="total"></strong></div>
+    </div>
+
+    <div id="cartStep">
+      <button type="button" class="button full" id="continueOrder" data-t="continue">CONTINUAR</button>
+      <button type="button" class="button secondary full" id="addMore" data-t="addMore">VOLVER AL MENÚ</button>
+    </div>
+
+    <form id="orderForm" hidden>
+      <fieldset>
+        <legend data-t="orderDetails">Datos de tu pedido</legend>
+        <div class="form-grid">
+          <label class="field">
+            <span data-t="branch">Sucursal</span>
+            <select id="branchSelect" required></select>
+          </label>
+          <label class="field">
+            <span data-t="service">Tipo de servicio</span>
+            <select id="service">
+              <option value="delivery" data-t="delivery">Entrega a domicilio</option>
+              <option value="pickup" data-t="pickup">Recoger en sucursal</option>
+            </select>
+          </label>
+          <label class="field">
+            <span data-t="name">Nombre *</span>
+            <input id="customerName" autocomplete="name" maxlength="100" required>
+          </label>
+          <label class="field">
+            <span data-t="phone">Celular *</span>
+            <input id="customerPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="25" required>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset id="addressFields">
+        <legend data-t="deliveryAddress">Domicilio de entrega</legend>
+        <div class="form-grid">
+          <label class="field wide">
+            <span data-t="street">Calle *</span>
+            <input id="street" autocomplete="address-line1" maxlength="150" required>
+          </label>
+          <label class="field">
+            <span data-t="number">Número exterior *</span>
+            <input id="number" maxlength="30" required>
+          </label>
+          <label class="field">
+            <span data-t="neighborhood">Colonia *</span>
+            <input id="neighborhood" maxlength="100" required>
+          </label>
+          <label class="field">
+            <span data-t="city">Municipio *</span>
+            <input id="city" autocomplete="address-level2" value="San Luis Potosí" maxlength="100" required>
+          </label>
+          <label class="field">
+            <span data-t="zip">Código postal *</span>
+            <input id="zip" autocomplete="postal-code" inputmode="numeric" pattern="[0-9]{5}" maxlength="5" required>
+          </label>
+          <label class="field wide">
+            <span data-t="references">Referencias (opcional)</span>
+            <input id="references" maxlength="250">
+          </label>
+          <label class="field wide">
+            <span data-t="location">Enlace de ubicación (opcional)</span>
+            <input id="location" maxlength="500">
+          </label>
+        </div>
+        <button type="button" class="button secondary full" id="useLocation" data-t="useLocation">USAR MI UBICACIÓN</button>
+        <p class="hint" data-t="locationNote">La ubicación se consulta solo al pulsar el botón. Verifica que corresponda al domicilio de entrega.</p>
+      </fieldset>
+
+      <label class="field">
+        <span data-t="notes">Indicaciones para tus platillos (opcional)</span>
+        <textarea id="notes" rows="3" maxlength="500"></textarea>
+      </label>
+      <p class="hint" data-t="confirmation">El restaurante confirmará disponibilidad, formas de pago, costo final y tiempo de entrega o recolección.</p>
+      <button type="submit" class="button full" data-t="send">CONTINUAR EN WHATSAPP</button>
+      <button type="button" class="button secondary full" id="backCart" data-t="backCart">VOLVER A MI PEDIDO</button>
+      <p class="hint" data-t="sendNote">WhatsApp se abrirá con el mensaje preparado. Pulsa Enviar allí para solicitar tu pedido.</p>
+    </form>
+  </section>
+</div>
+
+<div id="photoOverlay" class="overlay" hidden>
+  <section class="photo-dialog" role="dialog" aria-modal="true" aria-label="Fotografía">
+    <button type="button" id="closePhoto" class="close" aria-label="Cerrar">×</button>
+    <img id="largePhoto" alt="">
+  </section>
+</div>
+
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+"use strict";
+
+/* =========================================================
+   ZONA EDITABLE — IDENTIDAD, SUCURSALES, FOTOS Y PRODUCTOS
+   Los enlaces deben ser URLs simples, sin formato Markdown.
+   ========================================================= */
+
+const CONFIG = {
+  nombre: "La Aguachilería",
+  lema: "Con #aguachileria la vida es más Sabrosa",
+  lemaEn: "Life tastes better with #aguachileria",
+  whatsapp: "524444229190",
+  telefonoVisible: "444 422 9190",
+  instagram: "https://www.instagram.com/aguachileria/",
+
+  // Deja vacío hasta subir una fotografía propia.
+  // Ejemplo: "images/Restaurante/portada.jpg"
+  portada: "",
+
+  sucursales: [
+    {
+      id: "chapultepec",
+      nombre: "Chapultepec",
+      direccion: "Av. Chapultepec 482, San Luis Potosí",
+      mapsUrl: ""
+    },
+    {
+      id: "periferico",
+      nombre: "Periférico",
+      direccion: "B. Rocha Cordero 565, Periférico, San Luis Potosí",
+      mapsUrl: ""
+    }
+  ],
+
+  /*
+    AGREGA AQUÍ LA CARTA REAL.
+
+    Cada producto debe tener un ID único.
+    precio: número en MXN, sin símbolo $.
+    precio: null si aún no está confirmado; no podrá agregarse.
+    imagen: "" si todavía no tienes la fotografía.
+    activo: false para ocultarlo.
+
+    ESTRUCTURA DE EJEMPLO (NO SE PUBLICA):
+    {
+      id: "id-unico",
+      categoria: "Categoría oficial",
+      categoriaEn: "English category",
+      nombre: "Nombre oficial",
+      nombreEn: "English name",
+      descripcion: "Descripción oficial",
+      descripcionEn: "English description",
+      precio: null,
+      imagen: "images/Menu/nombre-del-archivo.jpg",
+      activo: true
+    }
+  */
+  platillos: []
+};
+
+/* ================= FIN DE LA ZONA EDITABLE ================= */
+
+const TEXT = {
+  es: {
+    brandLabel:"MARISCOS · SAN LUIS POTOSÍ",
+    heroKicker:"EL ANTOJO TIENE DIRECCIÓN",
+    daily:"Abierto todos los días",
+    twoBranches:"Dos sucursales en SLP",
+    menu:"MENÚ",visit:"VISÍTANOS",order:"MI PEDIDO",
+    menuKicker:"AQUÍ EMPIEZA EL ANTOJO",
+    menuTitle:"Nuestro menú",
+    menuIntro:"Elige tus favoritos y prepara tu pedido. Nosotros lo confirmamos por WhatsApp.",
+    currency:"Precios en pesos mexicanos · MXN",
+    emptyTitle:"¿Qué se te antoja hoy?",
+    emptyText:"Solicita nuestra carta y consulta los platillos, precios y disponibilidad directamente por WhatsApp.",
+    requestMenu:"CONSULTAR LA CARTA",
+    visitKicker:"NOS VEMOS EN LA AGUACHILERÍA",
+    branchesTitle:"Dos direcciones. El mismo antojo.",
+    visitIntro:"Visítanos en San Luis Potosí. Abrimos todos los días; consulta los horarios de cada sucursal por WhatsApp.",
+    contact:"PEDIDOS Y CONSULTAS",
+    footer:"Menú digital · San Luis Potosí",
+    all:"Todos",branchLabel:"SUCURSAL",maps:"CÓMO LLEGAR ↗",
+    orderTitle:"Mi pedido",review:"Revisa tus productos y cantidades.",
+    subtotal:"Productos",shipping:"Envío",total:"Total",
+    pending:"Por confirmar",pendingPrice:"Consultar precio",
+    continue:"CONTINUAR",addMore:"VOLVER AL MENÚ",
+    orderDetails:"Datos de tu pedido",branch:"Sucursal",
+    service:"Tipo de servicio",delivery:"Entrega a domicilio",
+    pickup:"Recoger en sucursal",name:"Nombre *",phone:"Celular *",
+    deliveryAddress:"Domicilio de entrega",street:"Calle *",
+    number:"Número exterior *",neighborhood:"Colonia *",city:"Municipio *",
+    zip:"Código postal *",references:"Referencias (opcional)",
+    location:"Enlace de ubicación (opcional)",useLocation:"USAR MI UBICACIÓN",
+    locationNote:"La ubicación se consulta solo al pulsar el botón. Verifica que corresponda al domicilio de entrega.",
+    notes:"Indicaciones para tus platillos (opcional)",
+    confirmation:"El restaurante confirmará disponibilidad, formas de pago, costo final y tiempo de entrega o recolección.",
+    send:"CONTINUAR EN WHATSAPP",backCart:"VOLVER A MI PEDIDO",
+    sendNote:"WhatsApp se abrirá con el mensaje preparado. Pulsa Enviar allí para solicitar tu pedido.",
+    emptyCart:"Tu pedido está vacío. Agrega productos desde el menú.",
+    quantity:"Cantidad",add:"Agregar",remove:"Quitar",
+    photo:"Fotografía del platillo",enlarge:"Ampliar fotografía",
+    noPhoto:"La Aguachilería",close:"Cerrar",
+    hello:"Hola, quisiera información de La Aguachilería.",
+    menuMessage:"Hola, ¿me comparten la carta y los precios actuales de La Aguachilería?",
+    locationAdded:"Ubicación agregada. Verifica que sea tu domicilio de entrega.",
+    locationError:"No fue posible obtener tu ubicación. Puedes escribir tu dirección o pegar un enlace de Maps.",
+    locationLoading:"Obteniendo ubicación…",
+    invalidPhone:"Escribe un celular de 10 a 15 dígitos.",
+    required:"Completa este dato.",
+    pickupShipping:"Sin envío",
+    contactWA:"Contactar por WhatsApp",
+    categories:"Categorías del menú"
+  },
+  en: {
+    brandLabel:"SEAFOOD · SAN LUIS POTOSÍ",
+    heroKicker:"YOUR NEXT CRAVING STARTS HERE",
+    daily:"Open every day",
+    twoBranches:"Two locations in SLP",
+    menu:"MENU",visit:"VISIT US",order:"MY ORDER",
+    menuKicker:"FIND YOUR NEXT FAVORITE",
+    menuTitle:"Our menu",
+    menuIntro:"Choose your favorites and prepare your order. We will confirm it via WhatsApp.",
+    currency:"Prices in Mexican pesos · MXN",
+    emptyTitle:"What are you craving today?",
+    emptyText:"Request our menu and check dishes, prices and availability directly via WhatsApp.",
+    requestMenu:"REQUEST THE MENU",
+    visitKicker:"SEE YOU AT LA AGUACHILERÍA",
+    branchesTitle:"Two locations. One delicious plan.",
+    visitIntro:"Visit us in San Luis Potosí. Open every day; ask for each location’s hours via WhatsApp.",
+    contact:"ORDERS AND QUESTIONS",
+    footer:"Digital menu · San Luis Potosí",
+    all:"All",branchLabel:"LOCATION",maps:"GET DIRECTIONS ↗",
+    orderTitle:"My order",review:"Review your items and quantities.",
+    subtotal:"Items",shipping:"Delivery",total:"Total",
+    pending:"To be confirmed",pendingPrice:"Ask for price",
+    continue:"CONTINUE",addMore:"BACK TO MENU",
+    orderDetails:"Order details",branch:"Location",
+    service:"Service",delivery:"Home delivery",
+    pickup:"Pick up at the restaurant",name:"Name *",phone:"Phone *",
+    deliveryAddress:"Delivery address",street:"Street *",
+    number:"Street number *",neighborhood:"Neighborhood *",city:"City *",
+    zip:"Postal code *",references:"Directions / landmarks (optional)",
+    location:"Location link (optional)",useLocation:"USE MY LOCATION",
+    locationNote:"Your location is accessed only when you press the button. Check that it matches your delivery address.",
+    notes:"Instructions for your dishes (optional)",
+    confirmation:"The restaurant will confirm availability, payment methods, final cost and delivery or pickup time.",
+    send:"CONTINUE IN WHATSAPP",backCart:"BACK TO MY ORDER",
+    sendNote:"WhatsApp will open with your message ready. Press Send there to request your order.",
+    emptyCart:"Your order is empty. Add items from the menu.",
+    quantity:"Quantity",add:"Add",remove:"Remove",
+    photo:"Dish photo",enlarge:"Enlarge photo",
+    noPhoto:"La Aguachilería",close:"Close",
+    hello:"Hello, I would like information about La Aguachilería.",
+    menuMessage:"Hello, could you send me La Aguachilería’s menu and current prices?",
+    locationAdded:"Location added. Check that it is your delivery address.",
+    locationError:"Could not access your location. Type your address or paste a Maps link.",
+    locationLoading:"Getting your location…",
+    invalidPhone:"Enter a phone number with 10 to 15 digits.",
+    required:"Please complete this field.",
+    pickupShipping:"No delivery",
+    contactWA:"Contact via WhatsApp",
+    categories:"Menu categories"
+  }
+};
+
+const $ = id => document.getElementById(id);
+let language = "es";
+let category = "";
+let currentView = "menu";
+let orderId = "";
+let toastTimer;
+let previousFocus;
+let activeOverlay = null;
+const cart = new Map();
+const products = CONFIG.platillos.filter(p => p.activo !== false);
+const t = key => TEXT[language][key] || TEXT.es[key] || key;
+const productText = (p,key) => language === "en" ? (p[key+"En"] || p[key] || "") : (p[key] || "");
+const validPrice = p => typeof p.precio === "number" && Number.isFinite(p.precio) && p.precio >= 0;
+const money = n => new Intl.NumberFormat(
+  language === "en" ? "en-US" : "es-MX",
+  {style:"currency",currency:"MXN",currencyDisplay:"code"}
+).format(n);
+const waUrl = text => "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(text);
+const el = (tag, cls, text) => {
+  const node = document.createElement(tag);
+  if(cls) node.className = cls;
+  if(text !== undefined) node.textContent = text;
+  return node;
+};
+
+function showToast(message){
+  clearTimeout(toastTimer);
+  $("toast").textContent = message;
+  $("toast").hidden = false;
+  toastTimer = setTimeout(() => $("toast").hidden = true, 4500);
+}
+
+function showView(view, updateHash = true, scroll = true){
+  currentView = view === "visit" ? "visit" : "menu";
+  $("menuView").hidden = currentView !== "menu";
+  $("visitView").hidden = currentView !== "visit";
+  document.querySelectorAll("[data-view]").forEach(button => {
+    const active = button.dataset.view === currentView;
+    button.classList.toggle("active",active);
+    if(active) button.setAttribute("aria-current","page");
+    else button.removeAttribute("aria-current");
+  });
+  if(updateHash){
+    try {history.replaceState(null,"",currentView === "visit" ? "#visitanos" : "#menu");}
+    catch {}
+  }
+  if(scroll){
+    $("main").scrollIntoView({
+      behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",
+      block:"start"
+    });
+  }
+}
+
+function modalOpen(id, focusId){
+  previousFocus = document.activeElement;
+  activeOverlay = $(id);
+  activeOverlay.hidden = false;
+  document.body.classList.add("modal-abierto");
+  $("hero").inert = true;
+  document.querySelector(".navbar").inert = true;
+  $("main").inert = true;
+  document.querySelector("footer").inert = true;
+  document.querySelector(".mobile-nav").inert = true;
+  $("floatingWA").inert = true;
+  $(focusId).focus();
+}
+
+function modalClose(){
+  if(!activeOverlay) return;
+  activeOverlay.hidden = true;
+  activeOverlay = null;
+  document.body.classList.remove("modal-abierto");
+  document.querySelectorAll("[inert]").forEach(node => node.inert = false);
+  if(previousFocus?.isConnected) previousFocus.focus();
+}
+
+document.addEventListener("keydown",event => {
+  if(!activeOverlay) return;
+  if(event.key === "Escape"){
+    event.preventDefault();
+    modalClose();
+    return;
+  }
+  if(event.key !== "Tab") return;
+  const focusable = [...activeOverlay.querySelectorAll(
+    "button:not(:disabled),a[href],input:not(:disabled),select:not(:disabled),textarea:not(:disabled)"
+  )].filter(node => node.getClientRects().length);
+  const first = focusable[0], last = focusable[focusable.length-1];
+  if(!first) return;
+  if(event.shiftKey && document.activeElement === first){
+    event.preventDefault();last.focus();
+  }else if(!event.shiftKey && document.activeElement === last){
+    event.preventDefault();first.focus();
+  }
+});
+
+["orderOverlay","photoOverlay"].forEach(id => {
+  $(id).addEventListener("click",event => {
+    if(event.target === $(id)) modalClose();
+  });
+});
+$("closeOrder").onclick = modalClose;
+$("closePhoto").onclick = modalClose;
+
+function quantityControls(product){
+  const row = el("div","quantity");
+  row.dataset.product = product.id;
+  row.append(el("span","",t("quantity")));
+  const stepper = el("div","stepper");
+  const minus = el("button","","−");
+  const plus = el("button","","+");
+  const output = el("output","","0");
+  minus.type = plus.type = "button";
+  minus.setAttribute("aria-label",t("remove")+" "+productText(product,"nombre"));
+  plus.setAttribute("aria-label",t("add")+" "+productText(product,"nombre"));
+  output.setAttribute("aria-label",t("quantity")+" "+productText(product,"nombre"));
+  minus.onclick = () => changeQuantity(product,-1);
+  plus.onclick = () => changeQuantity(product,1);
+  stepper.append(minus,output,plus);
+  row.append(stepper);
+  return row;
+}
+
+function changeQuantity(product, change){
+  if(!validPrice(product)) return;
+  const quantity = Math.max(0,Math.min(99,(cart.get(product.id)||0)+change));
+  if(quantity) cart.set(product.id,quantity);
+  else cart.delete(product.id);
+  if(cart.size && !orderId) orderId = "AG-"+Date.now().toString(36).toUpperCase();
+  if(!cart.size) orderId = "";
+  renderCart();
+  syncQuantities();
+}
+
+function syncQuantities(){
+  document.querySelectorAll("[data-product]").forEach(row => {
+    const p = products.find(product => product.id === row.dataset.product);
+    const quantity = cart.get(p.id)||0;
+    row.querySelector("output").textContent = quantity;
+    const buttons = row.querySelectorAll("button");
+    buttons[0].disabled = quantity === 0;
+    buttons[1].disabled = !validPrice(p) || quantity >= 99;
+  });
+  const count = [...cart.values()].reduce((sum,n) => sum+n,0);
+  document.querySelectorAll("[data-count]").forEach(badge => {
+    badge.textContent = count;
+    badge.hidden = count === 0;
+  });
+}
+
+function renderFilters(){
+  $("filters").replaceChildren();
+  const categories = [...new Set(products.map(p => p.categoria))];
+  ["",...categories].forEach(value => {
+    const p = products.find(product => product.categoria === value);
+    const label = value ? (language==="en" ? p.categoriaEn||value : value) : t("all");
+    const button = el("button","filter",label);
+    button.type = "button";
+    button.classList.toggle("active",category === value);
+    button.setAttribute("aria-pressed",String(category === value));
+    button.onclick = () => {
+      category = value;
+      renderFilters();
+      renderProducts();
+      const index = ["",...categories].indexOf(value);
+      $("filters").children[index]?.focus({preventScroll:true});
+    };
+    $("filters").append(button);
+  });
+  $("filters").hidden = products.length === 0;
+}
+
+function renderProducts(){
+  $("products").replaceChildren();
+  $("emptyMenu").hidden = products.length > 0;
+  $("currencyNote").hidden = products.length === 0;
+  products.filter(p => !category || p.categoria === category).forEach(p => {
+    const card = el("article","card");
+    const photo = el("button","photo");
+    photo.type = "button";
+    photo.disabled = true;
+    photo.setAttribute("aria-label",t("enlarge")+" "+productText(p,"nombre"));
+    const placeholder = el("span","photo-placeholder",t("noPhoto"));
+    photo.append(placeholder);
+    if(p.imagen){
+      const img = el("img");
+      img.alt = productText(p,"nombre");
+      img.loading = "lazy";
+      img.hidden = true;
+      img.onload = () => {
+        img.hidden = false;
+        placeholder.hidden = true;
+        photo.disabled = false;
+      };
+      img.onerror = () => {
+        img.hidden = true;
+        placeholder.hidden = false;
+        photo.disabled = true;
+      };
+      img.src = p.imagen;
+      photo.append(img);
+      photo.onclick = () => {
+        $("largePhoto").src = img.currentSrc || img.src;
+        $("largePhoto").alt = productText(p,"nombre");
+        modalOpen("photoOverlay","closePhoto");
+      };
+    }
+    const info = el("div","card-info");
+    const heading = el("div","card-title");
+    heading.append(
+      el("h3","",productText(p,"nombre")),
+      el("span","price",validPrice(p)?money(p.precio):t("pendingPrice"))
+    );
+    info.append(heading);
+    if(productText(p,"descripcion")){
+      info.append(el("p","description",productText(p,"descripcion")));
+    }
+    card.append(photo,info,quantityControls(p));
+    $("products").append(card);
+  });
+  syncQuantities();
+}
+
+function renderBranches(){
+  $("branches").replaceChildren();
+  CONFIG.sucursales.forEach((branch,index) => {
+    const card = el("article","branch");
+    card.append(
+      el("span","branch-number",t("branchLabel")+" · "+String(index+1).padStart(2,"0")),
+      el("h3","",branch.nombre),
+      el("p","",branch.direccion),
+      el("p","",t("daily"))
+    );
+    const link = el("a","button secondary",t("maps"));
+    // Si no hay enlace oficial, abre una búsqueda por dirección.
+    link.href = branch.mapsUrl ||
+      "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(branch.direccion);
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    card.append(link);
+    $("branches").append(card);
+  });
+}
+
+function renderCart(){
+  const container = $("cartRows");
+  const focused = container.contains(document.activeElement)
+    ? document.activeElement.getAttribute("aria-label") : null;
+  container.replaceChildren();
+  if(!cart.size) container.append(el("p","muted",t("emptyCart")));
+  let subtotal = 0;
+  products.forEach(p => {
+    const quantity = cart.get(p.id)||0;
+    if(!quantity) return;
+    subtotal += p.precio*quantity;
+    const row = el("div","cart-row");
+    const header = el("div","cart-row-head");
+    header.append(
+      el("strong","",productText(p,"nombre")),
+      el("span","",money(p.precio*quantity))
+    );
+    row.append(header,quantityControls(p));
+    container.append(row);
+  });
+  const pickup = $("service").value === "pickup";
+  $("subtotal").textContent = money(subtotal);
+  $("shipping").textContent = pickup?t("pickupShipping"):t("pending");
+  $("total").textContent = !cart.size ? money(0) : pickup?money(subtotal):t("pending");
+  $("continueOrder").disabled = !cart.size;
+  if(!cart.size) cartStep();
+  syncQuantities();
+  if(focused){
+    const target = [...container.querySelectorAll("button")].find(button =>
+      button.getAttribute("aria-label") === focused && !button.disabled
+    );
+    (target || $("addMore")).focus();
+  }
+}
+
+function cartStep(){
+  $("cartStep").hidden = false;
+  $("orderForm").hidden = true;
+}
+function openOrder(){
+  cartStep();
+  renderCart();
+  modalOpen("orderOverlay","closeOrder");
+}
+document.querySelectorAll("[data-order]").forEach(button => button.onclick = openOrder);
+document.querySelectorAll("[data-view]").forEach(button => {
+  button.onclick = () => showView(button.dataset.view);
+});
+$("continueOrder").onclick = () => {
+  if(!cart.size) return;
+  $("cartStep").hidden = true;
+  $("orderForm").hidden = false;
+  $("branchSelect").focus();
+};
+$("backCart").onclick = () => {
+  cartStep();
+  $("continueOrder").focus();
+};
+$("addMore").onclick = () => {
+  modalClose();
+  showView("menu");
+};
+function updateService(){
+  const delivery = $("service").value === "delivery";
+  $("addressFields").hidden = !delivery;
+  $("addressFields").disabled = !delivery;
+  renderCart();
+}
+$("service").onchange = updateService;
+
+CONFIG.sucursales.forEach(branch => {
+  const option = el("option","",branch.nombre);
+  option.value = branch.id;
+  $("branchSelect").append(option);
+});
+
+$("orderForm").querySelectorAll("input").forEach(input => {
+  input.addEventListener("input",() => input.setCustomValidity(""));
+});
+
+$("orderForm").addEventListener("submit",event => {
+  event.preventDefault();
+  if(!cart.size) return;
+  const form = $("orderForm");
+  form.querySelectorAll("input[required]").forEach(input => {
+    input.setCustomValidity(input.matches(":disabled") || input.value.trim() ? "" : t("required"));
+  });
+  const phone = $("customerPhone");
+  phone.setCustomValidity(/^\d{10,15}$/.test(phone.value.replace(/\D/g,""))?"":t("invalidPhone"));
+  if(!form.reportValidity()) return;
+
+  const branch = CONFIG.sucursales.find(b => b.id === $("branchSelect").value);
+  if(!branch) return;
+  const delivery = $("service").value === "delivery";
+  const value = id => $(id).value.trim();
+  const subtotal = products.reduce((sum,p) => sum+(cart.get(p.id)||0)*(validPrice(p)?p.precio:0),0);
+  const mxn = n => new Intl.NumberFormat("es-MX",{style:"currency",currency:"MXN"}).format(n)+" MXN";
+
+  // El pedido se envía en español para la operación del restaurante.
+  const lines = [
+    "*"+CONFIG.nombre+"*",
+    "Solicitud de pedido: "+orderId,
+    "Sucursal: "+branch.nombre,
+    "Dirección de sucursal: "+branch.direccion,
+    "Servicio: "+(delivery?"Entrega a domicilio":"Recoger en sucursal"),
+    "",
+    ...products.filter(p => cart.has(p.id)).map(p =>
+      cart.get(p.id)+" × "+p.nombre+" — "+mxn(p.precio*cart.get(p.id))
+    ),
+    "",
+    "Productos: "+mxn(subtotal),
+    "Envío: "+(delivery?"Por confirmar":"No aplica"),
+    "Total: "+(delivery?"Por confirmar con envío":mxn(subtotal)),
+    "",
+    "Nombre: "+value("customerName"),
+    "Celular: "+value("customerPhone")
+  ];
+  if(delivery){
+    lines.push(
+      "Dirección: "+[
+        value("street"),value("number"),value("neighborhood"),
+        value("city"),"CP "+value("zip")
+      ].join(", ")
+    );
+    if(value("references")) lines.push("Referencias: "+value("references"));
+    if(value("location")) lines.push("Ubicación: "+value("location"));
+  }
+  if(value("notes")) lines.push("Indicaciones: "+value("notes"));
+  lines.push("","Por favor confirma disponibilidad, formas de pago, costo final y tiempo de "+(delivery?"entrega.":"recolección."));
+  window.location.assign(waUrl(lines.join("\n")));
+});
+
+$("useLocation").onclick = () => {
+  if(!navigator.geolocation){
+    showToast(t("locationError"));
+    return;
+  }
+  $("useLocation").disabled = true;
+  showToast(t("locationLoading"));
+  navigator.geolocation.getCurrentPosition(position => {
+    $("useLocation").disabled = false;
+    $("location").value = "https://www.google.com/maps?q="+
+      position.coords.latitude.toFixed(6)+","+position.coords.longitude.toFixed(6);
+    showToast(t("locationAdded"));
+  },() => {
+    $("useLocation").disabled = false;
+    showToast(t("locationError"));
+  },{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+};
+
+function applyLanguage(){
+  document.documentElement.lang = language;
+  document.title = CONFIG.nombre+" | "+t("menuTitle");
+  document.querySelectorAll("[data-t]").forEach(node => node.textContent = t(node.dataset.t));
+  $("language").textContent = language==="es"?"English · EN":"Español · ES";
+  $("language").setAttribute("aria-label",language==="es"?"Switch to English":"Cambiar a español");
+  $("slogan").textContent = language==="es"?CONFIG.lema:CONFIG.lemaEn;
+  ["floatingWA","visitWA"].forEach(id => {
+    $(id).href = waUrl(t("hello"));
+    $(id).setAttribute("aria-label",t("contactWA"));
+  });
+  $("requestMenu").href = waUrl(t("menuMessage"));
+  $("closeOrder").setAttribute("aria-label",t("close"));
+  $("closePhoto").setAttribute("aria-label",t("close"));
+  $("photoOverlay").querySelector("[role=dialog]").setAttribute("aria-label",t("photo"));
+  $("filters").setAttribute("aria-label",t("categories"));
+  $("orderForm").querySelectorAll("input").forEach(input => input.setCustomValidity(""));
+  renderFilters();
+  renderProducts();
+  renderBranches();
+  renderCart();
+}
+$("language").onclick = () => {
+  language = language==="es"?"en":"es";
+  applyLanguage();
+};
+
+$("restaurantName").textContent = CONFIG.nombre;
+document.querySelector(".nav-brand").textContent = CONFIG.nombre;
+$("footerName").textContent = CONFIG.nombre;
+$("phoneDisplay").textContent = CONFIG.telefonoVisible;
+$("instagram").href = CONFIG.instagram;
+
+if(CONFIG.portada){
+  $("heroPhoto").onload = () => {
+    $("heroPhoto").hidden = false;
+    $("hero").classList.add("has-photo");
+  };
+  $("heroPhoto").onerror = () => {
+    $("heroPhoto").hidden = true;
+    $("hero").classList.remove("has-photo");
+  };
+  $("heroPhoto").src = CONFIG.portada;
+}
+
+window.addEventListener("hashchange",() => {
+  showView(location.hash==="#visitanos"?"visit":"menu",false);
+});
+applyLanguage();
+updateService();
+showView(location.hash==="#visitanos"?"visit":"menu",false,false);
+</script>
+</body>
+</html>
